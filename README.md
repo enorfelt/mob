@@ -36,7 +36,7 @@ simon$ git commit --message "describe what the mob session was all about"
 - `mob reset` deletes `mob-session` and `origin/mob-session`
 
 ## How can one customize it?
-You can set several environment variables, such as `MOBSWTICHER_WipBranch` and `MOBSWTICHER_RemoteName`, that will be picked up by `mob`. See [the source for an extensive list](https://github.com/enorfelt/MobSwitcher/blob/master/src/MobSwitcher.Cli/appsettings.json). Use `MOBSWTICHER_`as prefix.
+You can set several environment variables, such as `MOBSWTICHER_WipBranch` and `MOBSWTICHER_RemoteName`, that will be picked up by `mob`. See [the appsettings.json for an extensive list](https://github.com/enorfelt/MobSwitcher/blob/master/src/MobSwitcher.Cli/appsettings.json). Use `MOBSWTICHER_`as prefix.
 
 ## How to install on Windows vi Chocolatey
 
