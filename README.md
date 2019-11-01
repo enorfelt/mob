@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/i14f6y3iliqnl5yr?svg=true)](https://ci.appveyor.com/project/enorfelt/mobswitcher)
+[![Build status](https://ci.appveyor.com/api/projects/status/i14f6y3iliqnl5yr/branch/master?svg=true)](https://ci.appveyor.com/project/enorfelt/mobswitcher/branch/master)
+
 # Tool for Remote Mob Programming
 
 ![mob Logo](logo.svg)
