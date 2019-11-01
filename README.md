@@ -8,7 +8,7 @@ It keeps your master branch clean and creates WIP commits on `mob-session` branc
 
 ## How to use it?
 
-```bash
+```powershell
 # simon begins the mob session as typist
 simon$ mob start 10
 # WORK
