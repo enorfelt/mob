@@ -10,20 +10,20 @@ It keeps your master branch clean and creates WIP commits on `mob-session` branc
 
 ```powershell
 # simon begins the mob session as typist
-simon$ mob start 10
+simon> mob start 10
 # WORK
 # after 10 minutes...
-simon$ mob next
+simon> mob next
 # carola takes over as the second typist
-carola$ mob start 10
+carola> mob start 10
 # WORK
 # after 10 minutes...
-carola$ mob next
-simon$ mob start 10
+carola> mob next
+simon> mob start 10
 # WORK
 # After 6 minutes the work is done.
-simon$ mob done
-simon$ git commit --message "describe what the mob session was all about"
+simon> mob done
+simon> git commit --message "describe what the mob session was all about"
 ```
 
 ## How does it work?
@@ -43,14 +43,14 @@ You can set several environment variables, such as `MOBSWTICHER_WipBranch` and `
 Install [Chocolatey](https://chocolatey.org/) if you don't have so.
 
 ```bash
-$ choco install mobswitcher
+> choco install mobswitcher
 # Now, you can use the mob tool from any directory in the terminal
 ```
 
 To upgrade using Chocolatey, run the following:
 
 ```bash
-$ choco upgrade mobswitcher
+> choco upgrade mobswitcher
 # Now, you can use the mob tool from any directory in the terminal
 ```
 
