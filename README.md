@@ -3,7 +3,7 @@
 ![mob Logo](logo.svg)
 
 Swift handover for remote mobs using git.
-`mob` is a CLI tool written in GO.
+`mob` is a CLI tool written in .net core.
 It keeps your master branch clean and creates WIP commits on `mob-session` branch.
 
 ## How to use it?
@@ -36,46 +36,23 @@ simon$ git commit --message "describe what the mob session was all about"
 - `mob reset` deletes `mob-session` and `origin/mob-session`
 
 ## How can one customize it?
-You can set several environment variables, such as `MOB_WIP_BRANCH` and `MOB_REMOTE_NAME`, that will be picked up by `mob`. See [the source for an extensive list](https://github.com/remotemobprogramming/mob/blob/master/mob.go#L12).
+You can set several environment variables, such as `MOBSWTICHER_WipBranch` and `MOBSWTICHER_RemoteName`, that will be picked up by `mob`. See [the source for an extensive list](https://github.com/enorfelt/MobSwitcher/blob/master/src/MobSwitcher.Cli/appsettings.json). Use `MOBSWTICHER_`as prefix.
 
-## How does it really work?
+## How to install on Windows vi Chocolatey
 
-```bash
-$ MOB_DEBUG=true mob start
-```
-
-Prints out any git commands and their results.
-
-## How to install
+Install [Chocolatey](https://chocolatey.org/) if you don't have so.
 
 ```bash
-$ brew install golang
-$ git clone https://github.com/remotemobprogramming/mob
-$ cd mob
-$ ./install
+$ choco install mobswitcher
 # Now, you can use the mob tool from any directory in the terminal
 ```
 
-On linux systems you need the GNUstep speech engine to get the timer running.
-
-On Ubuntu:
+To upgrade using Chocolatey, run the following:
 
 ```bash
-sudo apt-get install gnustep-gui-runtime
+$ choco upgrade mobswitcher
+# Now, you can use the mob tool from any directory in the terminal
 ```
-
-### Windows
-
-- Install [Golang](https://golang.org/)
-  - Download and execute MSI from Download page
-- Open console and execute following commands
-
-    ```bash
-    > git clone https://github.com/remotemobprogramming/mob
-    > cd mob
-    > .\install.cmd
-    # Now, you can use the mob tool from anywhere directory in the terminal
-    ```
 
 ## How to contribute
 
@@ -83,6 +60,4 @@ Create a pull request.
 
 ## Credits
 
-- Developed and maintained by [Simon Harrer](https://twitter.com/simonharrer).
-- Contributions and testing by Jochen Christ, Martin Huber, Franziska Dessart, and Nikolas Hermann. Thank you!
-- Logo designed by [Sonja Scheungrab](https://twitter.com/multebaerr).
+- Special thanks to the orignial creators and concept by [remotemobprogramming/mob](https://github.com/remotemobprogramming/mob)
