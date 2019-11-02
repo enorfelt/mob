@@ -1,6 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/i14f6y3iliqnl5yr?svg=true)](https://ci.appveyor.com/project/enorfelt/mobswitcher)
-[![Build status](https://ci.appveyor.com/api/projects/status/i14f6y3iliqnl5yr/branch/master?svg=true)](https://ci.appveyor.com/project/enorfelt/mobswitcher/branch/master)
-
 # Tool for Remote Mob Programming
 
 ![mob Logo](logo.svg)
@@ -40,6 +37,9 @@ simon> git commit --message "describe what the mob session was all about"
 
 ## How can one customize it?
 You can set several environment variables, such as `MOBSWTICHER_WipBranch` and `MOBSWTICHER_RemoteName`, that will be picked up by `mob`. See [the appsettings.json for an extensive list](https://github.com/enorfelt/MobSwitcher/blob/master/src/MobSwitcher.Cli/appsettings.json). Use `MOBSWTICHER_`as prefix.
+
+Pretty print is enabled by default. It uses the [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) Hack font face. You need to install it and enable it in your terminal.
+If you want to disable pretty print, you need to set MOBSWITCHER_UsePrettyPrint to false.
 
 ## How to install on Windows vi Chocolatey
 
