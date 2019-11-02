@@ -10,18 +10,16 @@
     <authors>Erik Norfelt</authors>
     <projectUrl>https://github.com/enorfelt/MobSwitcher</projectUrl>
     <iconUrl>https://github.com/enorfelt/MobSwitcher/raw/master/logo.svg</iconUrl>
-    <copyright>2019</copyright>
+    <copyright>Copyright (c) 2019 Erik Norfelt</copyright>
     <projectSourceUrl>https://github.com/enorfelt/MobSwitcher</projectSourceUrl>
     <docsUrl>https://github.com/enorfelt/MobSwitcher</docsUrl>
+    <releaseNotes>https://github.com/enorfelt/MobSwitcher/wiki/RreleaseNotes</releaseNotes>
     <tags>mobswitcher mob programming windows net core</tags>
     <summary>CLI tool written in .net core that allows to switch the typist in a remote mob programming session quickly with git and a remote branch.</summary>
     <description>CLI tool written in .net core that allows to switch the typist in a remote mob programming session quickly with git and a remote branch.</description>
-    <dependencies>
-      <dependency id="chocolatey" version="0.10.15" />
-    </dependencies>
   </metadata>
   <files>
-    <file src="tools\mob.exe" target="" />
+    <file src="tools\**" target="tools" />
     <!--Building from Linux? You may need this instead: <file src="tools/**" target="tools" />-->
   </files>
 </package>
