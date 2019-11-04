@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>mobswitcher</id>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
     <packageSourceUrl>https://github.com/enorfelt/MobSwitcher</packageSourceUrl>
     <owners>Erik Norfelt</owners>
     <title>MobSwitcher</title>
@@ -14,6 +14,7 @@
     <projectSourceUrl>https://github.com/enorfelt/MobSwitcher</projectSourceUrl>
     <docsUrl>https://github.com/enorfelt/MobSwitcher</docsUrl>
     <releaseNotes>https://github.com/enorfelt/MobSwitcher/wiki/RreleaseNotes</releaseNotes>
+    <licenseUrl>https://github.com/enorfelt/MobSwitcher/blob/master/pkg/MobSwitcher/tools/LICENSE.txt</licenseUrl>
     <tags>mobswitcher mob programming windows net core</tags>
     <summary>CLI tool written in .net core that allows to switch the typist in a remote mob programming session quickly with git and a remote branch.</summary>
     <description>CLI tool written in .net core that allows to switch the typist in a remote mob programming session quickly with git and a remote branch.</description>
