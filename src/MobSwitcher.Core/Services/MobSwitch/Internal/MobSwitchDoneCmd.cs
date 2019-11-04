@@ -20,7 +20,7 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
 
             if (HasMobbingBranchOrigin())
             {
-                if (IsNothingToCommit())
+                if (!IsNothingToCommit())
                 {
                     Git("add --all");
                     Git($"commit --message \"{WIP_COMMIT_MESSAGE}\"");
@@ -30,7 +30,7 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
 
                 Git($"checkout {BASE_BRANCH}");
                 Git($"merge {REMOTE_NAME}/{BASE_BRANCH} --ff-only");
-                Git($"merge --squash {WIP_BRANCH}");
+                Git($"merge --squash --ff {WIP_BRANCH}");
 
                 Git($"branch -D {WIP_BRANCH}");
                 Git($"push {REMOTE_NAME} --delete {WIP_BRANCH}");
