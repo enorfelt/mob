@@ -27,10 +27,10 @@ namespace MobSwitcher.Cli.Services
 
             var options = new ProgressBarOptions
             {
-                ProgressCharacter = '=',
-                ProgressBarOnBottom = false,
-                ForegroundColorDone = ConsoleColor.Green,
-                ForegroundColor = ConsoleColor.White,
+                ForegroundColor = ConsoleColor.Yellow,
+                ForegroundColorDone = ConsoleColor.DarkGreen,
+                BackgroundColor = ConsoleColor.DarkGray,
+                BackgroundCharacter = '\u2593',
                 EnableTaskBarProgress = true
             };
 

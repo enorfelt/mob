@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using McMaster.Extensions.CommandLineUtils;
+using MobSwitcher.Cli.Commands.Config;
 
 namespace MobSwitcher.Cli.Commands
 {
@@ -14,7 +15,8 @@ namespace MobSwitcher.Cli.Commands
         typeof(NextCmd),
         typeof(ResetCmd),
         typeof(StatusCmd),
-        typeof(TimerCmd)
+        typeof(TimerCmd),
+        typeof(ConfigCmd)
     )]
     public class MobCmd
     {

@@ -16,6 +16,32 @@ namespace MobSwitcher.Core.Services.Git
             this.say = say;
         }
 
+        public string GitDir
+        {
+            get
+            {
+                if (IsInsideWorkingTree) 
+                {
+                    var path = Git("rev-parse --show-toplevel", true);
+                    return path.Trim().Replace("/", "\\", StringComparison.InvariantCultureIgnoreCase);
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public bool IsInsideWorkingTree
+        {
+            get
+            {
+                if (bool.TryParse(Git("rev-parse --is-inside-work-tree", true), out var isIndWorkingTree))
+                {
+                    return isIndWorkingTree;
+                }
+                return false;
+            }
+        }
+
         public string Git(string args, bool silent = false)
         {
             if (string.IsNullOrEmpty(args))
