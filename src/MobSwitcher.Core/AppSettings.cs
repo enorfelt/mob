@@ -7,6 +7,7 @@ namespace MobSwitcher.Core
     public class AppSettings
     {
         public bool UsePrettyPrint { get; set; }
+        public bool UsePullRequest { get; set; }
         public string WipBranch { get; set; }
         public string RemoteName { get; set; }
         public string BaseBranch { get; set; }

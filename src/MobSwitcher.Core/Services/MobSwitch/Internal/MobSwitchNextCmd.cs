@@ -29,6 +29,8 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
                 var changes = base.GetChangesOfLastCommit();
                 Git($"push {REMOTE_NAME} {WIP_BRANCH}");
                 service.Say.Say(changes);
+                if (base.service.AppSettings.Value.UsePullRequest)
+                    service.Say.SayTodo("Remember to create pull request");
             }
 
             ShowNext();

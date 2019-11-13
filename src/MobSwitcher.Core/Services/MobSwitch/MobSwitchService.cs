@@ -22,7 +22,14 @@ namespace MobSwitcher.Core.Services.MobSwitch
 
         public void Done()
         {
-            new MobSwitchDoneCmd(this).Run();
+            if (AppSettings.Value.UsePullRequest)
+            {
+                new MobSwitchDonePrCmd(this).Run();
+            }
+            else
+            {
+                new MobSwitchDoneCmd(this).Run();
+            }
         }
 
         public void Join()
