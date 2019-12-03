@@ -9,13 +9,14 @@
     <title>MobSwitcher</title>
     <authors>Erik Norfelt</authors>
     <projectUrl>https://github.com/enorfelt/MobSwitcher</projectUrl>
-    <iconUrl>https://github.com/enorfelt/MobSwitcher/raw/master/logo.svg</iconUrl>
+    <iconUrl>https://rawcdn.githack.com/enorfelt/MobSwitcher/ea626bc99df305d5263ffc063591bb9f3b3ffc08/icon.png</iconUrl>
     <copyright>Copyright (c) 2019 Erik Norfelt</copyright>
     <projectSourceUrl>https://github.com/enorfelt/MobSwitcher</projectSourceUrl>
     <docsUrl>https://github.com/enorfelt/MobSwitcher</docsUrl>
     <releaseNotes>https://github.com/enorfelt/MobSwitcher/wiki/RreleaseNotes</releaseNotes>
     <licenseUrl>https://github.com/enorfelt/MobSwitcher/blob/master/pkg/MobSwitcher/tools/LICENSE.txt</licenseUrl>
     <tags>mobswitcher mob programming windows net core</tags>
+    <bugTrackerUrl>https://github.com/enorfelt/MobSwitcher/issues</bugTrackerUrl>
     <summary>CLI tool written in .net core that allows to switch the typist in a remote mob programming session quickly with git and a remote branch.</summary>
     <description>CLI tool written in .net core that allows to switch the typist in a remote mob programming session quickly with git and a remote branch.</description>
   </metadata>
