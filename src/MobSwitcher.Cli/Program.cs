@@ -30,40 +30,9 @@ namespace MobSwitcher.Cli
                 .Enrich.FromLogContext()
                 .CreateLogger();
 
-            var builder = new HostBuilder()
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddLogging(config =>
-                    {
-                        config.ClearProviders();
-                        config.AddProvider(new SerilogLoggerProvider(Log.Logger));
-                    });
-                    services.AddSingleton<IShellCmdService, CmdShellCmdService>();
-                    services.AddSingleton<IGitService, GitService>();
-                    services.AddSingleton<IMobSwitchService, MobSwitchService>();
-                    services.AddSingleton<ITimerService, TimerService>();
-                    services.AddSingleton<IToastService, ToastService>();
-                    services.AddSingleton<ISayService>((provider) =>
-                    {
-                        var appSettings = provider.GetService<IOptions<AppSettings>>();
-                        if (appSettings.Value.UsePrettyPrint)
-                            return new SayPrettyService(provider.GetService<IConsole>());
-                        return new SayService(provider.GetService<IConsole>());
-                    });
-
-
-                    var configuration = new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json", optional: true, reloadOnChange: true)
-                        .AddEnvironmentVariables("MOBSWTICHER_")
-                        .AddGitPath()
-                        .Build();
-                    services.Configure<AppSettings>(configuration);
-                });
-
             try
             {
-                return await builder.RunCommandLineApplicationAsync<MobCmd>(args).ConfigureAwait(true);
+                return await new Startup().Run(args).ConfigureAwait(true);
             }
             catch (Exception ex)
             {

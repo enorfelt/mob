@@ -41,7 +41,7 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
         private void ShowNext()
         {
             var changes = Git($"--no-pager log {BASE_BRANCH}..{WIP_BRANCH} --pretty=\"format:%an\" --abbrev-commit")?.Trim();
-            var lines = changes.Replace("\\r\\n", "\\n", StringComparison.InvariantCulture).Split("\\n");
+            var lines = changes.Replace("\r\n", "\n", StringComparison.InvariantCulture).Split("\n");
             var numberOfLines = lines.Length;
 
             var gitUserName = GetGitUserName();
@@ -60,9 +60,9 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
                 }
                 if (!string.IsNullOrEmpty(history))
                 {
-                    history = $", {history}";
+                    history = ", " + history;
                 }
-                history = $"{lines[i]}{history}";
+                history = lines[i] + history;
             }
         }
 

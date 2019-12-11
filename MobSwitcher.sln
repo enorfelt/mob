@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobSwitcher.Cli", "src\MobS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobSwitcher.Core", "src\MobSwitcher.Core\MobSwitcher.Core.csproj", "{0879996A-B764-4B1A-A416-0CC95FA25E2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobSwitcher.Windows", "src\MobSwitcher.Windows\MobSwitcher.Windows.csproj", "{131BE029-AD31-474B-B818-62AEF3AD08BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobSwitcher.Windows", "src\MobSwitcher.Windows\MobSwitcher.Windows.csproj", "{131BE029-AD31-474B-B818-62AEF3AD08BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tst", "Tst", "{ABF49702-0384-4FE0-A37D-A0853B929013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobSwticher.Cli.Tests", "tst\MobSwticher.Cli.Tests\MobSwticher.Cli.Tests.csproj", "{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,18 @@ Global
 		{131BE029-AD31-474B-B818-62AEF3AD08BD}.Release|x64.Build.0 = Release|Any CPU
 		{131BE029-AD31-474B-B818-62AEF3AD08BD}.Release|x86.ActiveCfg = Release|Any CPU
 		{131BE029-AD31-474B-B818-62AEF3AD08BD}.Release|x86.Build.0 = Release|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Debug|x64.Build.0 = Debug|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Debug|x86.Build.0 = Debug|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x64.ActiveCfg = Release|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x64.Build.0 = Release|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x86.ActiveCfg = Release|Any CPU
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +81,7 @@ Global
 		{B45ABBF7-C34A-48F7-838F-1402C0F492CE} = {F250E4F2-3AEF-433E-8A70-29DD651F7511}
 		{0879996A-B764-4B1A-A416-0CC95FA25E2A} = {F250E4F2-3AEF-433E-8A70-29DD651F7511}
 		{131BE029-AD31-474B-B818-62AEF3AD08BD} = {F250E4F2-3AEF-433E-8A70-29DD651F7511}
+		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7} = {ABF49702-0384-4FE0-A37D-A0853B929013}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7921BA2C-7F64-40CB-A826-8B1338861250}
