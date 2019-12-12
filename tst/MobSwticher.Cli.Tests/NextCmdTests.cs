@@ -7,18 +7,20 @@ using Xunit;
 
 namespace MobSwticher.Cli.Tests
 {
-    public class NextCmdTests : IClassFixture<StartupFixture>
+    public class NextCmdTests
     {
         protected readonly StartupFixture fixture;
 
-        public NextCmdTests(StartupFixture fixture)
+        public NextCmdTests()
         {
-            this.fixture = fixture;
+            this.fixture = new StartupFixture();
         }
 
         [Theory]
-        [InlineData("Daniel\r\nMagnus\r\nErik\r\nDaniel\r\n", "Daniel\n", "Erik")]
-        [InlineData("Erik\r\nDaniel\r\nMagnus\r\nErik\r\nDaniel\r\n", "Erik\n", "Magnus")]
+        [InlineData("User2\r\nUser1\r\n", "User2\n", "User1")]
+        [InlineData("User1\r\nUser2\r\nUser1\r\n", "User1\n", "User2")]
+        [InlineData("User1\r\nUser3\r\nUser2\r\nUser1\r\n", "User1\n", "User2")]
+        [InlineData("User2\r\nUser1\r\nUser3\r\nUser2\r\nUser1\r\n", "User2\n", "User3")]
         public async Task NextShouldShowNameOfNextTypist(string commiters, string currentUsers, string expectedNext)
         {
             
@@ -35,7 +37,6 @@ namespace MobSwticher.Cli.Tests
 
             result.Should().Be(0);
             fixture.FakeSayService.Infos.Last().Should().Contain($"***{expectedNext}***");
-            
         }
     }
 }

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MobSwticher.Cli.Tests
 {
@@ -35,6 +36,15 @@ namespace MobSwticher.Cli.Tests
             });
 
             base.ConfigureServices(hostContext, services);
+        }
+
+        protected readonly object lockObject = new object();
+        public override Task<int> Run(string[] args)
+        {
+            lock (lockObject)
+            {
+                return base.Run(args);
+            }
         }
     }
 }
