@@ -40,30 +40,36 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
 
         private void ShowNext()
         {
-            var changes = Git($"--no-pager log {BASE_BRANCH}..{WIP_BRANCH} --pretty=\"format:%an\" --abbrev-commit")?.Trim();
-            var lines = changes.Replace("\r\n", "\n", StringComparison.InvariantCulture).Split("\n");
-            var numberOfLines = lines.Length;
+            var changesByUsers = Git($"--no-pager log {BASE_BRANCH}..{WIP_BRANCH} --pretty=\"format:%an\" --abbrev-commit")?.Trim();
+            var users = changesByUsers.Replace("\r\n", "\n", StringComparison.InvariantCulture).Split("\n");
+            var numberOfUsers = users.Length;
 
-            var gitUserName = GetGitUserName();
+            var currentUser = GetGitUserName();
 
-            if (numberOfLines < 1)
+            if (numberOfUsers < 1)
                 return;
 
             var history = string.Empty;
-            for (var i = 0; i < numberOfLines; i++)
+            for (var i = 0; i < numberOfUsers; i++)
             {
-                if (lines[i].Equals(gitUserName, StringComparison.InvariantCultureIgnoreCase) && i > 0)
+                if (users[i].Equals(currentUser, StringComparison.InvariantCultureIgnoreCase) && i > 0)
                 {
-                    service.Say.SayInfo($"Committers after your last commit: {history}");
-                    service.Say.SayInfo($"***{lines[i - 1]}*** is (probably next.");
+                    SayNextInfo(history, users[i - 1]);
                     return;
                 }
                 if (!string.IsNullOrEmpty(history))
                 {
                     history = ", " + history;
                 }
-                history = lines[i] + history;
+                history = users[i] + history;
             }
+            SayNextInfo(history, users[numberOfUsers - 1]);
+        }
+
+        private void SayNextInfo(string history, string nextUser)
+        {
+            service.Say.SayInfo($"Committers after your last commit: {history}");
+            service.Say.SayInfo($"***{nextUser}*** is (probably) next.");
         }
 
         private string GetGitUserName()

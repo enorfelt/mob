@@ -39,7 +39,7 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
 
         internal string GetChangesOfLastCommit()
         {
-            return Git("diff HEAD^1 --stat")?.Trim();
+            return Git("diff HEAD^1 --stat");
         }
 
         internal bool HasMobbingBranch()

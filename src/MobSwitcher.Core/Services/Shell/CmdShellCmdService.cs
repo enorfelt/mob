@@ -8,5 +8,6 @@ namespace MobSwitcher.Core.Services.Shell
     {
         public override string FileName => "cmd.exe";
         public override string CmdParamName => "/c";
+        public override string EscapeCharacter => "^";
     }
 }

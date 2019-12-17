@@ -12,10 +12,16 @@ namespace MobSwitcher.Core.Services.Shell
 
         public abstract string CmdParamName { get; }
 
+        public abstract string EscapeCharacter { get; }
+
         public string Run(string shellCmd)
         {
+            if (string.IsNullOrEmpty(shellCmd))
+                return string.Empty;
+
             var startInfo = new ProcessStartInfo(FileName);
-            startInfo.Arguments = $"${CmdParamName} {shellCmd}";
+            shellCmd = shellCmd.Replace(EscapeCharacter, $"{EscapeCharacter}{EscapeCharacter}", StringComparison.InvariantCulture);
+            startInfo.Arguments = $"{CmdParamName} {shellCmd}";
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
             startInfo.WorkingDirectory = Directory.GetCurrentDirectory();

@@ -17,6 +17,7 @@ namespace MobSwticher.Cli.Tests
         }
 
         [Theory]
+        [InlineData("User1\r\n", "User1\n", "User1")]
         [InlineData("User2\r\nUser1\r\n", "User2\n", "User1")]
         [InlineData("User1\r\nUser2\r\nUser1\r\n", "User1\n", "User2")]
         [InlineData("User1\r\nUser3\r\nUser2\r\nUser1\r\n", "User1\n", "User2")]
