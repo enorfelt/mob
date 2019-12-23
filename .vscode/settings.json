@@ -1,0 +1,5 @@
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "csharpfixformat.style.newline.elseCatch": true
+}

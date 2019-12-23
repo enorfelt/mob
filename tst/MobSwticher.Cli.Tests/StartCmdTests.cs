@@ -12,7 +12,6 @@ namespace MobSwticher.Cli.Tests {
 
     public StartCmdTests() {
       fixture = new StartupFixture();
-      fixture.FakeShellCmdService = new FakeShellCmdService();
       fakeCmdService = fixture.FakeShellCmdService;
       fakeSayService = fixture.FakeSayService;
     }

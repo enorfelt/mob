@@ -14,9 +14,10 @@ using MobSwticher.Cli.Tests.Fakes;
 namespace MobSwticher.Cli.Tests {
   public class StartupFixture : Startup {
     public FakeShellCmdService FakeShellCmdService;
-    public FakeSayService FakeSayService = new FakeSayService ();
+    public FakeSayService FakeSayService;
     public StartupFixture () : base () {
-
+      FakeShellCmdService = new FakeShellCmdService();
+      FakeSayService = new FakeSayService();
     }
 
     public override void ConfigureServices (HostBuilderContext hostContext, IServiceCollection services) {
