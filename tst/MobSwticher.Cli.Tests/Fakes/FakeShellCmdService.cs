@@ -5,27 +5,35 @@ using System.Text;
 
 namespace MobSwticher.Cli.Tests.Fakes
 {
-    public class FakeShellCmdService : IShellCmdService
+  public class FakeShellCmdService : IShellCmdService
+  {
+    public int Called { get; private set; }
+
+    public List<string> Commands { get; set; }
+
+    public List<string> Responses { get; set; }
+
+    public FakeShellCmdService()
     {
-        public int Called { get; private set; }
-
-        public FakeShellCmdService()
-        {
-            ShellCmdResponses = new Dictionary<string, string>();
-        }
-
-        public Dictionary<string, string> ShellCmdResponses { get; private set; }
-
-
-        public string Run(string shellCmd)
-        {
-            Called++;
-
-            if (!ShellCmdResponses.ContainsKey(shellCmd))
-                return string.Empty;
-
-            var response = ShellCmdResponses[shellCmd];
-            return response;
-        }
+      ShellCmdResponses = new Dictionary<string, string>();
+      Commands = new List<string>();
+      Responses = new List<string>();
     }
+
+    public Dictionary<string, string> ShellCmdResponses { get; private set; }
+
+    public string Run(string shellCmd)
+    {
+      Called++;
+
+      Commands.Add(shellCmd);
+
+      if (!ShellCmdResponses.ContainsKey(shellCmd))
+        return string.Empty;
+
+      var response = ShellCmdResponses[shellCmd];
+      Responses.Add(response);
+      return response;
+    }
+  }
 }
