@@ -6,9 +6,7 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
   internal class MobSwitchNextCmd : MobSwitchBaseCmd
   {
     internal MobSwitchNextCmd(MobSwitchService service) : base(service)
-    {
-      ;
-    }
+    { }
 
     internal override void Run()
     {

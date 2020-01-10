@@ -60,5 +60,17 @@ namespace MobSwticher.Cli.Tests {
       result.Should().Be(0);
       fixture.FakeSayService.Says.Should().Contain($"***{expectedNext}*** is (probably) next.");
     }
+
+    [Theory]
+    [InlineData("-s")]
+    [InlineData("--Stay")]
+    public async Task NextStayArgumentShouldStayOnMobSessionBranch(string arg) 
+    {
+      fixture.FakeShellCmdService.ShellCmdResponses.Add("git branch", "  master\n* mob-session\n");
+
+      var result = await fixture.Run(new [] { "next", arg});
+
+      fixture.FakeShellCmdService.Commands.Last().Should().NotContain("git checkout master");
+    }
   }
 }
