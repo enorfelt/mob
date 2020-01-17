@@ -21,52 +21,51 @@ using System.Threading.Tasks;
 
 namespace MobSwitcher.Cli
 {
-    public class Startup
+  public class Startup
+  {
+    private readonly IHostBuilder builder;
+
+    public Startup()
     {
-        private readonly IHostBuilder builder;
-
-        public Startup()
-        {
-            builder = new HostBuilder()
-                .ConfigureServices((hostContext, services) =>
-                {
-                    ConfigureServices(hostContext, services);
-                });
-        }
-
-        public virtual void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
-        {
-            services.AddLogging(config =>
-            {
-                config.ClearProviders();
-                config.AddProvider(new SerilogLoggerProvider(Log.Logger));
-            });
-            services.AddSingleton<IShellCmdService, CmdShellCmdService>();
-            services.AddSingletonIfNotExists<IGitService, GitService>();
-            services.AddSingleton<IMobSwitchService, MobSwitchService>();
-            services.AddSingleton<ITimerService, TimerService>();
-            services.AddSingleton<IToastService, ToastService>();
-            services.AddSingletonIfNotExists<ISayService>((provider) =>
-            {
-                var appSettings = provider.GetService<IOptions<AppSettings>>();
-                if (appSettings.Value.UsePrettyPrint)
-                    return new SayPrettyService(provider.GetService<IConsole>());
-                return new SayService(provider.GetService<IConsole>());
-            });
-
-
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables("MOBSWTICHER_")
-                .AddGitPath(services)
-                .Build();
-            services.Configure<AppSettings>(configuration);
-        }
-
-        public virtual Task<int> Run(string[] args)
-        {
-            return builder.RunCommandLineApplicationAsync<MobCmd>(args);
-        }
+      builder = new HostBuilder()
+          .ConfigureServices((hostContext, services) =>
+          {
+            ConfigureServices(hostContext, services);
+          });
     }
+
+    public virtual void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
+    {
+      services.AddLogging(config =>
+      {
+        config.ClearProviders();
+        config.AddProvider(new SerilogLoggerProvider(Log.Logger));
+      });
+      services.AddSingleton<IShellCmdService, CmdShellCmdService>();
+      services.AddSingletonIfNotExists<IGitService, GitService>();
+      services.AddSingleton<IMobSwitchService, MobSwitchService>();
+      services.AddSingleton<ITimerService, TimerService>();
+      services.AddSingleton<IToastService, ToastService>();
+      services.AddSingletonIfNotExists<ISayService>((provider) =>
+      {
+        var appSettings = provider.GetService<IOptions<AppSettings>>();
+        if (appSettings.Value.UsePrettyPrint)
+          return new SayPrettyService(provider.GetService<IConsole>());
+        return new SayService(provider.GetService<IConsole>());
+      });
+
+      var configuration = new ConfigurationBuilder()
+          .SetBasePath(Directory.GetCurrentDirectory())
+          .AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json", optional: true, reloadOnChange: true)
+          .AddEnvironmentVariables("MOBSWTICHER_")
+          .AddGitPath(services)
+          .Build();
+      services.Configure<AppSettings>(configuration);
+    }
+
+    public virtual Task<int> Run(string[] args)
+    {
+      return builder.RunCommandLineApplicationAsync<MobCmd>(args);
+    }
+  }
 }
