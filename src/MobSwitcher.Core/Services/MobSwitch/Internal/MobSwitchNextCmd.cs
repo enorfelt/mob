@@ -1,5 +1,4 @@
 ﻿using System;
-using MobSwitcher.Core.Services.Git;
 
 namespace MobSwitcher.Core.Services.MobSwitch.Internal
 {
@@ -33,7 +32,10 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
 
       ShowNext();
 
-      Git($"checkout {BASE_BRANCH}");
+      if (!base.AppSettings.UseStayNext)
+      {
+        Git($"checkout {BASE_BRANCH}");
+      }
     }
 
     private void ShowNext()

@@ -1,17 +1,20 @@
+using FluentAssertions;
+using MobSwticher.Cli.Tests.Fakes;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using FluentAssertions;
-using MobSwticher.Cli.Tests.Fakes;
 using Xunit;
 
-namespace MobSwticher.Cli.Tests {
-  public class NextCmdTests {
+namespace MobSwticher.Cli.Tests
+{
+  public class NextCmdTests
+  {
     protected readonly StartupFixture fixture;
     private readonly FakeShellCmdService fakeShellCmd;
     private readonly FakeSayService fakeSay;
 
-    public NextCmdTests() {
+    public NextCmdTests()
+    {
       this.fixture = new StartupFixture();
       fakeShellCmd = this.fixture.FakeShellCmdService;
       fakeSay = this.fixture.FakeSayService;
@@ -22,14 +25,15 @@ namespace MobSwticher.Cli.Tests {
     [InlineData("NEXT")]
     [InlineData("n")]
     [InlineData("N")]
-    public async Task ShouldNextOnArgument(string cmd) {
+    public async Task ShouldNextOnArgument(string cmd)
+    {
       var result = await fixture.Run(cmd);
 
       fakeShellCmd.Called.Should().BeGreaterOrEqualTo(1);
     }
 
     [Fact]
-    public async Task ShouldNotNextWhenNotMobbing() 
+    public async Task ShouldNotNextWhenNotMobbing()
     {
       fakeShellCmd.ShellCmdResponses.Add("git branch", string.Empty);
 
@@ -44,7 +48,8 @@ namespace MobSwticher.Cli.Tests {
     [InlineData("User1\r\nUser2\r\nUser1\r\n", "User1\n", "User2")]
     [InlineData("User1\r\nUser3\r\nUser2\r\nUser1\r\n", "User1\n", "User2")]
     [InlineData("User2\r\nUser1\r\nUser3\r\nUser2\r\nUser1\r\n", "User2\n", "User3")]
-    public async Task NextShouldShowNameOfNextTypist(string commiters, string currentUsers, string expectedNext) {
+    public async Task NextShouldShowNameOfNextTypist(string commiters, string currentUsers, string expectedNext)
+    {
 
       fixture.FakeShellCmdService = new FakeShellCmdService();
       fixture.FakeShellCmdService.ShellCmdResponses.Add("git rev-parse --is-inside-work-tree", "true");
@@ -55,20 +60,30 @@ namespace MobSwticher.Cli.Tests {
       fixture.FakeShellCmdService.ShellCmdResponses.Add("git config --get user.name", currentUsers);
       fixture.FakeShellCmdService.ShellCmdResponses.Add("git checkout master", string.Empty);
 
-      var result = await fixture.Run(new [] { "next" });
+      var result = await fixture.Run(new[] { "next" });
 
       result.Should().Be(0);
       fixture.FakeSayService.Says.Should().Contain($"***{expectedNext}*** is (probably) next.");
     }
 
-    [Theory]
-    [InlineData("-s")]
-    [InlineData("--Stay")]
-    public async Task NextStayArgumentShouldStayOnMobSessionBranch(string arg) 
+    [Fact]
+    public async Task NextShouldCheckoutMasterBranch()
     {
       fixture.FakeShellCmdService.ShellCmdResponses.Add("git branch", "  master\n* mob-session\n");
 
-      var result = await fixture.Run(new [] { "next", arg});
+      var result = await fixture.Run(new[] { "next" });
+
+      fixture.FakeShellCmdService.Commands.Last().Should().Contain("git checkout master");
+    }
+
+    [Theory]
+    [InlineData("-s")]
+    [InlineData("--Stay")]
+    public async Task NextStayArgumentShouldStayOnMobSessionBranch(string arg)
+    {
+      fixture.FakeShellCmdService.ShellCmdResponses.Add("git branch", "  master\n* mob-session\n");
+
+      var result = await fixture.Run(new[] { "next", arg });
 
       fixture.FakeShellCmdService.Commands.Last().Should().NotContain("git checkout master");
     }

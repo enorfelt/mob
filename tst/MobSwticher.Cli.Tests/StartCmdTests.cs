@@ -79,5 +79,17 @@ namespace MobSwticher.Cli.Tests {
 
       fakeSayService.Says.Any(r => r.Contains("purging local branch and start new")).Should().BeTrue();
     }
+
+    [Fact]
+    public async Task ShouldNotDeleteMobBranchWhenOnMobBranchAndMobbing()
+    {
+      fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
+      fakeCmdService.ShellCmdResponses.Add("git branch", "* mob-session");
+      fakeCmdService.ShellCmdResponses.Add("git branch --remotes", "  origin/mob-session");
+
+      var result = await fixture.Run("start");
+
+      fakeCmdService.Commands.Should().NotContain("git branch -D mob-session");
+    }
   }
 }

@@ -14,12 +14,14 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal {
 
     internal MobSwitchBaseCmd (MobSwitchService service) {
       this.service = service;
-      var appSettings = service.AppSettings.Value;
-      WIP_BRANCH = appSettings.WipBranch;
-      REMOTE_NAME = appSettings.RemoteName;
-      BASE_BRANCH = appSettings.BaseBranch;
-      WIP_COMMIT_MESSAGE = appSettings.WipCommitMessage;
+      AppSettings = service.AppSettings.Value;
+      WIP_BRANCH = AppSettings.WipBranch;
+      REMOTE_NAME = AppSettings.RemoteName;
+      BASE_BRANCH = AppSettings.BaseBranch;
+      WIP_COMMIT_MESSAGE = AppSettings.WipCommitMessage;
     }
+
+    public AppSettings AppSettings { get; set; }
 
     internal abstract void Run ();
 
