@@ -25,6 +25,7 @@ namespace MobSwitcher.Windows
       var maxTickCount = minutes * 60;
       var ticks = 1;
       //using var pbar = new ProgressBar(maxTickCount, $"typist time completed out of {minutes} min.", options);
+      toast.ProgressBar(maxTickCount);
 
       while (!isStopped && ticks <= maxTickCount)
       {

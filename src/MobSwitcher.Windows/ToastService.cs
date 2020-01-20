@@ -85,7 +85,7 @@ namespace MobSwitcher.Windows
 
     public void ProgressBar(int maxCount)
     {
-      var content = new ToastContent()
+      var toastContent = new ToastContent()
       {
         Visual = new ToastVisual()
         {
@@ -93,25 +93,52 @@ namespace MobSwitcher.Windows
           {
             Children =
             {
-              new AdaptiveText()
-              {
-                Text = "Downloading your weekly playlist..."
-              },
-              new AdaptiveProgressBar()
-              {
-                  Title = "Weekly playlist",
-                  Value = new BindableProgressBarValue("progressValue"),
-                  ValueStringOverride = new BindableString("progressValueString"),
-                  Status = new BindableString("progressStatus")
-              }
+                new AdaptiveText()
+                {
+                    Text = "Downloading this week's new music..."
+                },
+                new AdaptiveProgressBar()
+                {
+                    Value = new BindableProgressBarValue("progressValue"),
+                    ValueStringOverride = new BindableString("progressValueString"),
+                    Title = new BindableString("progressTitle"),
+                    Status = new BindableString("progressStatus")
+                }
             }
           }
+        },
+        Actions = new ToastActionsCustom()
+        {
+          Buttons =
+        {
+            new ToastButton("Pause", "action=pauseDownload&downloadId=9438108")
+            {
+                ActivationType = ToastActivationType.Background
+            },
+            new ToastButton("Cancel", "action=cancelDownload&downloadId=9438108")
+            {
+                ActivationType = ToastActivationType.Background
+            }
         }
+        },
+        Launch = "action=viewDownload&downloadId=9438108"
       };
 
+
+
       var doc = new XmlDocument();
-      doc.LoadXml(content.GetContent());
-      var toast = new ToastNotification(doc);
+      var content = toastContent.GetContent();
+      doc.LoadXml(content);
+      // Create the toast notification
+      var toastNotif = new ToastNotification(doc);
+      toastNotif.Data = new NotificationData();
+      toastNotif.Data.Values["progressTitle"] = "Katy Perry";
+      toastNotif.Data.Values["progressValue"] = "0.6";
+      toastNotif.Data.Values["progressValueString"] = "15/26 songs";
+      toastNotif.Data.Values["progressStatus"] = "Downloading...";
+      var appId = "enorfelt!MobSwitcher";
+      // And send the notification
+      ToastNotificationManager.CreateToastNotifier(appId).Show(toastNotif);
 
       //https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/toast-progress-bar#elements-that-support-data-binding
     }

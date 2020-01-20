@@ -44,7 +44,7 @@ namespace MobSwitcher.Cli
       services.AddSingleton<IShellCmdService, CmdShellCmdService>();
       services.AddSingletonIfNotExists<IGitService, GitService>();
       services.AddSingleton<IMobSwitchService, MobSwitchService>();
-      services.AddSingleton<ITimerService, TimerService>();
+      services.AddSingleton<ITimerService, TimerToastService>();
       services.AddSingleton<IToastService, ToastService>();
       services.AddSingletonIfNotExists<ISayService>((provider) =>
       {
