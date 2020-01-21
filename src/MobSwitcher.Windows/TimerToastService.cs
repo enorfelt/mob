@@ -3,6 +3,7 @@ using MobSwitcher.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace MobSwitcher.Windows
 {
@@ -24,18 +25,17 @@ namespace MobSwitcher.Windows
 
       var maxTickCount = minutes * 60;
       var ticks = 1;
-      //using var pbar = new ProgressBar(maxTickCount, $"typist time completed out of {minutes} min.", options);
-      toast.ProgressBar(maxTickCount);
-
+      var progressBar = new ToastProgressBar(maxTickCount);
+      progressBar.Show();
       while (!isStopped && ticks <= maxTickCount)
       {
-        //Thread.Sleep(1000);
-        //pbar.Tick(ticks++);
+        Thread.Sleep(1000);
+        progressBar.Tick(ticks++);
       }
 
       if (!isStopped)
       {
-        //toast.Toast("Time is up!", "mob next OR mob done");
+        toast.Toast("Time is up!", "mob next OR mob done");
       }
 
       console.CancelKeyPress -= Console_CancelKeyPress;

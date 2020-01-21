@@ -23,7 +23,7 @@
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="501d0a8a-db77-4878-b5a7-e379756d394c">
         <Shortcut Id="ApplicationStartMenuShortcut" Name="MobSwitcher" Description="Shortcut that enables Toast Notifications" Target="[#MobSwitcher.png]" WorkingDirectory="APPLICATIONROOTDIRECTORY" Icon="MobSwitcher.ico">
-          <ShortcutProperty Key="System.AppUserModel.ID" Value="enorfelt!MobSwitcher" />
+          <ShortcutProperty Key="System.AppUserModel.ID" Value="{fb4831aa-8a45-4828-ba0e-b840bcfb395a}!MobSwitcher" />
           <ShortcutProperty Key="System.AppUserModel.ToastActivatorCLSID" Value="{f002bd1b-2050-4cba-8ff8-0e21338dc8ac}"></ShortcutProperty>
         </Shortcut>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
