@@ -14,12 +14,40 @@ namespace MobSwitcher.Windows
       if (string.IsNullOrEmpty(message))
         throw new ArgumentNullException(nameof(message));
 
-      var template = CreateToast(ToastTemplateType.ToastImageAndText01);
+      var toastContent = new ToastContent()
+      {
+        Visual = new ToastVisual()
+        {
+          BindingGeneric = new ToastBindingGeneric()
+          {
+            Children =
+            {
+                new AdaptiveText()
+                {
+                    Text = message
+                }
+            }
+          }
+        },
+        Actions = new ToastActionsCustom()
+        {
+          Buttons =
+          {
+            new ToastButtonDismiss()
+          }
+        },
+        Scenario = ToastScenario.Alarm,
+        Duration = ToastDuration.Long,
+        Audio = new ToastAudio
+        {
+          Loop = true,
+          Src = new Uri("ms-winsoundevent:Notification.Looping.Alarm4")
+        }
+      };
 
-      var textNodes = template.GetElementsByTagName("text");
-      textNodes.Item(0).InnerText = message;
-
-      Show(template);
+      var doc = new XmlDocument();
+      doc.LoadXml(toastContent.GetContent());
+      Show(doc);
     }
 
     public void Toast(string message1, string message2)
@@ -30,13 +58,45 @@ namespace MobSwitcher.Windows
       if (string.IsNullOrEmpty(message2))
         throw new ArgumentNullException(nameof(message2));
 
-      var template = CreateToast(ToastTemplateType.ToastImageAndText02);
 
-      var textNodes = template.GetElementsByTagName("text");
-      textNodes.Item(0).InnerText = message1;
-      textNodes.Item(1).InnerText = message2;
+      var toastContent = new ToastContent()
+      {
+        Visual = new ToastVisual()
+        {
+          BindingGeneric = new ToastBindingGeneric()
+          {
+            Children =
+            {
+                new AdaptiveText()
+                {
+                    Text = message1
+                },
+                new AdaptiveText()
+                {
+                    Text = message2
+                }
+            }
+          }
+        },
+        Actions = new ToastActionsCustom()
+        {
+          Buttons =
+          {
+            new ToastButtonDismiss()
+          }
+        },
+        Scenario = ToastScenario.Alarm,
+        Duration = ToastDuration.Long,
+        Audio = new ToastAudio
+        {
+          Loop = true,
+          Src = new Uri("ms-winsoundevent:Notification.Looping.Alarm4")
+        }
+      };
 
-      Show(template);
+      var doc = new XmlDocument();
+      doc.LoadXml(toastContent.GetContent());
+      Show(doc);
     }
 
     private void Show(XmlDocument template)
@@ -47,43 +107,5 @@ namespace MobSwitcher.Windows
       notification.Group = ToastProperties.Group;
       notifier.Show(notification);
     }
-
-    public static XmlDocument CreateToast(ToastTemplateType toastTemplateType)
-    {
-      var template = ToastNotificationManager.GetTemplateContent(toastTemplateType);
-
-      var toastNode = template.SelectSingleNode("/toast") as XmlElement;
-      toastNode.SetAttribute("duration", "long");
-      //toastNode.SetAttribute("scenario", "alarm");
-
-      var audio = template.CreateElement("audio");
-      audio.SetAttribute("src", "ms-winsoundevent:Notification.Looping.Alarm4");
-      audio.SetAttribute("loop", "true");
-      toastNode.AppendChild(audio);
-
-      var actions = template.CreateElement("actions");
-      var nextAction = template.CreateElement("action");
-      nextAction.SetAttribute("content", "OK");
-      nextAction.SetAttribute("arguments", "dismiss");
-      nextAction.SetAttribute("activationType", "background");
-      //nextAction.SetAttribute("imageUri", "Assets/ToastButtonIcons/Dismiss.png");
-      //actions.AppendChild(nextAction);
-      //toastNode.AppendChild(actions);
-
-      var imageNodes = template.GetElementsByTagName("image");
-      if (imageNodes.Count > 0)
-      {
-        var imageElement = imageNodes[0] as XmlElement;
-        if (imageElement != null)
-        {
-          var imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "toast-icon.png");
-          imageElement.SetAttribute("src", imagePath);
-          imageElement.SetAttribute("alt", "mobswitcher logo");
-        }
-      }
-
-      return template;
-    }
-
   }
 }

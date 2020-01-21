@@ -14,7 +14,6 @@ namespace MobSwitcher.Windows
     }
 
     public double MaxTickCount { get; private set; }
-    public IFormatProvider Culture { get; private set; }
 
     public void Tick(double newTickCount)
     {
@@ -29,10 +28,17 @@ namespace MobSwitcher.Windows
       var progressValue = newTickCount / MaxTickCount;
       var stringValue = progressValue.ToString("0.##", CultureInfo.InvariantCulture);
       data.Values["progressValue"] = stringValue;
-      data.Values["progressValueString"] = "15/15 minutes";
+      var minutes = MaxTickCount / 60;
+      var minutesLeft = Math.Round((MaxTickCount - newTickCount) / 60, 1);
+      data.Values["progressValueString"] = $"{minutesLeft}/{minutes} minutes";
 
       // Update the existing notification's data by using tag/group
       ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId).Update(data, ToastProperties.Tag, ToastProperties.Group);
+    }
+
+    internal void ClearHistory()
+    {
+      ToastNotificationManager.History.Clear(ToastProperties.AppId);
     }
 
     internal void Show()
@@ -69,9 +75,9 @@ namespace MobSwitcher.Windows
       toastNotif.Group = ToastProperties.Group;
       toastNotif.Data = new NotificationData();
       toastNotif.Data.Values["progressValue"] = "0";
-      toastNotif.Data.Values["progressValueString"] = "15/15 minutes";
+      var minutes = MaxTickCount / 60;
+      toastNotif.Data.Values["progressValueString"] = $"{minutes}/{minutes} minutes";
       toastNotif.Data.Values["progressStatus"] = "Time left...";
-      var appId = "Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"; // {fb4831aa-8a45-4828-ba0e-b840bcfb395a}!MobSwitcher
 
       // And send the notification
       ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId).Show(toastNotif);

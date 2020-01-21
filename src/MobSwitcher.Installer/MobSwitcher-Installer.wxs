@@ -14,15 +14,15 @@
     </Directory>
 
     <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
-      <Component Id="MobSwitcher.png" Guid="e0599f32-2e06-454e-802a-2268c921412c">
-        <File Id="MobSwitcher.png" Source="MobSwitcher.png" KeyPath="yes" Checksum="yes"/>
+      <Component Id="mob.exe" Guid="a43570d7-f427-457c-8537-f3864395652d">
+        <File Id="mob.exe" Source="mob.exe" KeyPath="yes" Checksum="yes"/>
       </Component>
     </DirectoryRef>
 
     <Icon Id="MobSwitcher.ico" SourceFile="MobSwitcher.ico" />
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="501d0a8a-db77-4878-b5a7-e379756d394c">
-        <Shortcut Id="ApplicationStartMenuShortcut" Name="MobSwitcher" Description="Shortcut that enables Toast Notifications" Target="[#MobSwitcher.png]" WorkingDirectory="APPLICATIONROOTDIRECTORY" Icon="MobSwitcher.ico">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="MobSwitcher" Description="Shortcut that enables Toast Notifications" Target="[#mob.exe]" WorkingDirectory="APPLICATIONROOTDIRECTORY" Icon="MobSwitcher.ico">
           <ShortcutProperty Key="System.AppUserModel.ID" Value="{fb4831aa-8a45-4828-ba0e-b840bcfb395a}!MobSwitcher" />
           <ShortcutProperty Key="System.AppUserModel.ToastActivatorCLSID" Value="{f002bd1b-2050-4cba-8ff8-0e21338dc8ac}"></ShortcutProperty>
         </Shortcut>
@@ -33,7 +33,7 @@
     </DirectoryRef>
 
     <Feature Id="MainApplication" Title="Main Application" Level="1">
-      <ComponentRef Id="MobSwitcher.png" />
+      <ComponentRef Id="mob.exe" />
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
   </Product>

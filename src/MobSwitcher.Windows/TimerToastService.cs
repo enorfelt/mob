@@ -11,21 +11,26 @@ namespace MobSwitcher.Windows
   {
     private readonly IConsole console;
     private readonly IToastService toast;
+    private readonly ISayService sayService;
     private bool isStopped = false;
 
-    public TimerToastService(IConsole console, IToastService toast)
+    public TimerToastService(IConsole console, IToastService toast, ISayService sayService)
     {
       this.console = console;
       this.toast = toast;
+      this.sayService = sayService;
     }
 
     public void Start(int minutes)
     {
       console.CancelKeyPress += Console_CancelKeyPress;
 
+      sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
+
       var maxTickCount = minutes * 60;
       var ticks = 1;
       var progressBar = new ToastProgressBar(maxTickCount);
+      progressBar.ClearHistory();
       progressBar.Show();
       while (!isStopped && ticks <= maxTickCount)
       {
@@ -36,6 +41,10 @@ namespace MobSwitcher.Windows
       if (!isStopped)
       {
         toast.Toast("Time is up!", "mob next OR mob done");
+      }
+      else
+      {
+        progressBar.ClearHistory();
       }
 
       console.CancelKeyPress -= Console_CancelKeyPress;
