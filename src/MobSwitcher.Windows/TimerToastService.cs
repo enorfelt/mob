@@ -23,19 +23,26 @@ namespace MobSwitcher.Windows
 
     public void Start(int minutes)
     {
-      console.CancelKeyPress += Console_CancelKeyPress;
+      if (minutes < 1)
+      {
+        minutes = 0;
+      }
 
-      sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
+      console.CancelKeyPress += Console_CancelKeyPress;
 
       var maxTickCount = minutes * 60;
       var ticks = 1;
       var progressBar = new ToastProgressBar(maxTickCount);
       progressBar.ClearHistory();
-      progressBar.Show();
-      while (!isStopped && ticks <= maxTickCount)
+      if (minutes > 0)
       {
-        Thread.Sleep(1000);
-        progressBar.Tick(ticks++);
+        sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
+        progressBar.Show();
+        while (!isStopped && ticks <= maxTickCount)
+        {
+          Thread.Sleep(1000);
+          progressBar.Tick(ticks++);
+        }
       }
 
       if (!isStopped)
