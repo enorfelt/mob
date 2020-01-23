@@ -41,7 +41,7 @@
     <Feature Id="MainApplication" Title="Main Application" Level="1">
       <ComponentRef Id="mob.exe" />
       <ComponentRef Id="ApplicationShortcut" />
-      <ComponentRef Id="Path" />  
+      <ComponentRef Id="Path" />
     </Feature>
   </Product>
 </Wix>
