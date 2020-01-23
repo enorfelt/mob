@@ -9,7 +9,7 @@ $packageArgs = @{
   fileType      = 'MSI'
   file         = $fileLocation
   softwareName  = 'MobSwitcher*'
-  checksum      = '4C51874C3F2E9B3167635DC04279F49637EFC874F561C8139582F9B6B1BF96EF'
+  checksum      = 'A93DFC336B2C7D7DA45759E61538C7D00B46DCC49866DBEB12FEA6F34E6ECB29'
   checksumType  = 'sha256'
   silentArgs    = "/qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`" APPLICATIONROOTDIRECTORY=`"$($toolsDir)`""
   validExitCodes= @(0, 3010, 1641)

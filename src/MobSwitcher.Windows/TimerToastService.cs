@@ -10,14 +10,12 @@ namespace MobSwitcher.Windows
   public class TimerToastService : ITimerService
   {
     private readonly IConsole console;
-    private readonly IToastService toast;
     private readonly ISayService sayService;
-    private bool isStopped = false;
+    private ToastProgressBar toastProgressBar;
 
-    public TimerToastService(IConsole console, IToastService toast, ISayService sayService)
+    public TimerToastService(IConsole console, ISayService sayService)
     {
       this.console = console;
-      this.toast = toast;
       this.sayService = sayService;
     }
 
@@ -30,42 +28,17 @@ namespace MobSwitcher.Windows
 
       console.CancelKeyPress += Console_CancelKeyPress;
 
-      var maxTickCount = minutes * 60;
-      var ticks = 1;
-      var progressBar = new ToastProgressBar(maxTickCount);
-      progressBar.ClearHistory();
-      if (minutes > 0)
-      {
-        sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
-        progressBar.Show();
-        while (!isStopped && ticks <= maxTickCount)
-        {
-          Thread.Sleep(1000);
-          progressBar.Tick(ticks++);
-        }
-      }
-
-      if (!isStopped)
-      {
-        Thread.Sleep(1000);
-        toast.Toast("Time is up!", "mob next OR mob done");
-      }
-      else
-      {
-        progressBar.ClearHistory();
-      }
+      var durationInSeconds = minutes * 60;
+      toastProgressBar = new ToastProgressBar(durationInSeconds);
+      sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
+      toastProgressBar.Start();
 
       console.CancelKeyPress -= Console_CancelKeyPress;
     }
 
     private void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
     {
-      Stop();
-    }
-
-    public void Stop()
-    {
-      isStopped = true;
+      toastProgressBar?.Stop();
     }
   }
 }

@@ -7,6 +7,5 @@ namespace MobSwitcher.Core.Services
     public interface ITimerService
     {
         void Start(int minutes);
-        void Stop();
     }
 }
