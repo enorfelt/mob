@@ -28,15 +28,6 @@ namespace MobSwticher.Cli.Tests {
     }
 
     [Fact]
-    public async Task ShouldNotStartWhenThereIsUncommitedChanges() {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", "not empty response");
-
-      var result = await fixture.Run("start");
-
-      fakeSayService.Says.Should().Contain("uncomitted changes");
-    }
-
-    [Fact]
     public async Task ShouldRejoinWhenHasSessionBranchLocalAndRemote() {
       fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
       fakeCmdService.ShellCmdResponses.Add("git branch", "  mob-session");
@@ -90,6 +81,31 @@ namespace MobSwticher.Cli.Tests {
       var result = await fixture.Run("start");
 
       fakeCmdService.Commands.Should().NotContain("git branch -D mob-session");
+    }
+
+    [Fact]
+    public async Task ShouldKeepUncommitedChangesWhenPrompted()
+    {
+      fakeCmdService.ShellCmdResponses.Add("git status --short", "work in progress");
+      fakeSayService.GetYesNoAnswer = true;
+
+      var result = await fixture.Run("start");
+
+      fakeCmdService.Commands.Should().Contain("git stash");
+      fakeCmdService.Commands.Should().Contain("git stash pop");
+    }
+
+    [Fact]
+    public async Task ShouldDiscardUncommitedChangesBeforeStart()
+    {
+      fakeCmdService.ShellCmdResponses.Add("git status --short", "work in progress");
+      fakeSayService.GetYesNoAnswer = false;
+
+      var result = await fixture.Run("start");
+
+      fakeCmdService.Commands.Should().Contain("git reset --hard");
+      fakeCmdService.Commands.Should().NotContain("git stash");
+      fakeCmdService.Commands.Should().NotContain("git stash pop");
     }
   }
 }

@@ -1,5 +1,9 @@
 {
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "csharpfixformat.style.newline.elseCatch": true
+  "csharpfixformat.style.newline.elseCatch": true,
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true
+  }
 }

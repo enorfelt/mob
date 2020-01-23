@@ -12,5 +12,6 @@ namespace MobSwitcher.Core.Services
         void SayNote(string s);
         void SayTodo(string s);
         void SayInfo(string s);
+        bool GetYesNo(string message, bool defaultAnswer);
     }
 }

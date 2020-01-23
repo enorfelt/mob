@@ -8,10 +8,19 @@
 
     internal override void Run()
     {
+      var keepUncommitedChanges = false;
       if (!IsNothingToCommit())
       {
-        service.Say.SayNote("uncomitted changes");
-        return;
+        keepUncommitedChanges = service.Say.GetYesNo("Keep uncommited changes?", true);
+      }
+
+      if (keepUncommitedChanges)
+      {
+        Git("stash");
+      }
+      else
+      {
+        Git("reset --hard");
       }
 
       Git("fetch --prune");
@@ -54,6 +63,11 @@
         Git($"branch {WIP_BRANCH}");
         Git($"checkout {WIP_BRANCH}");
         Git($"push --set-upstream {REMOTE_NAME} {WIP_BRANCH}");
+      }
+
+      if (keepUncommitedChanges)
+      {
+        Git("stash pop");
       }
     }
   }
