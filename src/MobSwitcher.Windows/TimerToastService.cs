@@ -47,6 +47,7 @@ namespace MobSwitcher.Windows
 
       if (!isStopped)
       {
+        Thread.Sleep(1000);
         toast.Toast("Time is up!", "mob next OR mob done");
       }
       else

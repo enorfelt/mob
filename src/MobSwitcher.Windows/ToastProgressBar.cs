@@ -64,6 +64,7 @@ namespace MobSwitcher.Windows
             }
           }
         },
+        Duration = ToastDuration.Short
       };
 
       var doc = new XmlDocument();
