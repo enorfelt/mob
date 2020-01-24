@@ -1,9 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using MobSwitcher.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace MobSwitcher.Windows
 {
@@ -19,20 +16,19 @@ namespace MobSwitcher.Windows
       this.sayService = sayService;
     }
 
-    public void Start(int minutes)
+    public void Start(double minutes)
     {
-      if (minutes < 1)
+      if (minutes < 0)
       {
         minutes = 0;
       }
-
       console.CancelKeyPress += Console_CancelKeyPress;
 
-      var durationInSeconds = minutes * 60;
+      var durationInSeconds = Convert.ToInt32(minutes * 60);
       toastProgressBar = new ToastProgressBar(durationInSeconds);
       sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
       toastProgressBar.Start();
-
+      
       console.CancelKeyPress -= Console_CancelKeyPress;
     }
 

@@ -15,6 +15,6 @@ and can be verified like this:
   - Use chocolatey utility 'checksum.exe mob.exe -t=sha256'
 
   checksum type: sha256
-  checksum: A93DFC336B2C7D7DA45759E61538C7D00B46DCC49866DBEB12FEA6F34E6ECB29
+  checksum: CCA0CA8D6E30726FD06FA9252DF4C8CBBB0FACD15F692173368E33FADCEF615E
 
 File 'LICENSE.txt' is obtained from <https://github.com/enorfelt/MobSwitcher/blob/master/pkg/MobSwitcher/tools/LICENSE.txt>

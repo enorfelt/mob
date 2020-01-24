@@ -17,6 +17,9 @@
       <Component Id="mob.exe" Guid="a43570d7-f427-457c-8537-f3864395652d">
         <File Id="mob.exe" Source="mob.exe" KeyPath="yes" Checksum="yes"/>
       </Component>
+      <Component Id="mob.pdb" Guid="03d6c5be-02b0-4e0d-b86f-1e942224a882">
+        <File Id="mob.pdb" Source="mob.pdb" KeyPath="yes" Checksum="yes"/>
+      </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="TARGETDIR">
@@ -40,6 +43,7 @@
 
     <Feature Id="MainApplication" Title="Main Application" Level="1">
       <ComponentRef Id="mob.exe" />
+      <ComponentRef Id="mob.pdb" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="Path" />
     </Feature>

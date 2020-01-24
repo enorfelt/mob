@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace MobSwitcher.Cli.Commands
         private readonly ITimerService timer;
 
         [Argument(0, Description = "Time in minutes", Name = "Time", ShowInHelpText = true)]
-        public int Time { get; set; }
+        public string Time { get; set; }
 
         public StartCmd(IMobSwitchService mobSwitch, ITimerService timer)
         {
@@ -27,9 +28,10 @@ namespace MobSwitcher.Cli.Commands
         public Task<int> OnExecute()
         {
             this.mobSwitch.Start();
-            if (Time > 0)
+            
+            if (double.TryParse(Time, out var time) && time > 0)
             {
-                timer.Start(Time);
+                timer.Start(time);
             }
             return Task.FromResult(0);
         }

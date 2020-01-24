@@ -18,7 +18,7 @@ namespace MobSwitcher.Cli.Services
       this.toast = toast;
     }
 
-    public void Start(int minutes)
+    public void Start(double minutes)
     {
       if (minutes < 1)
       {
@@ -39,7 +39,7 @@ namespace MobSwitcher.Cli.Services
 
       var maxTickCount = minutes * 60;
       var ticks = 1;
-      using var pbar = new ProgressBar(maxTickCount, $"typist time completed out of {minutes} min.", options);
+      using var pbar = new ProgressBar(Convert.ToInt32(maxTickCount), $"typist time completed out of {minutes} min.", options);
       while (!isStopped && ticks <= maxTickCount)
       {
         Thread.Sleep(1000);
