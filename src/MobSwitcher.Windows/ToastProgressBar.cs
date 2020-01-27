@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using static MobSwitcher.Windows.TaskbarProgress;
 
 namespace MobSwitcher.Windows
 {
@@ -16,6 +17,7 @@ namespace MobSwitcher.Windows
     public ToastProgressBar(int durationInSeconds)
     {
       DurationInSeconds = durationInSeconds;
+      TaskbarProgress.SetState(TaskbarStates.Normal);
     }
 
     public int DurationInSeconds { get; set; }
@@ -40,6 +42,7 @@ namespace MobSwitcher.Windows
       }
 
       ShowCompleted();
+      TaskbarProgress.SetState(TaskbarProgress.TaskbarStates.NoProgress);
     }
 
     public void Stop()
@@ -133,6 +136,8 @@ namespace MobSwitcher.Windows
       data.Values["progressValueString"] = $"{minutesLeft}/{durationInMinutes} minutes";
 
       toastNotifier.Update(data, ToastProperties.Tag, ToastProperties.Group);
+
+      TaskbarProgress.SetValue(percentageCompleted * 100, 100);
     }
 
     private void ShowProgressBar()
