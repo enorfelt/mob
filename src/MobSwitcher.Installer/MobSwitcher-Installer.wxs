@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" UpgradeCode="414c7e1d-08b2-4d9e-94b2-cee4e0b3910a" Version="1.3.0" Language="1033" Name="MobSwitcher" Manufacturer="enorfelt">
+  <Product Id="*" UpgradeCode="414c7e1d-08b2-4d9e-94b2-cee4e0b3910a" Version="1.3.1" Language="1033" Name="MobSwitcher" Manufacturer="enorfelt">
     <Package InstallerVersion="300" Compressed="yes"/>
     <Media Id="1" Cabinet="MobSwitcher.cab" EmbedCab="yes" />
 
