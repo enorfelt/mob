@@ -4,7 +4,7 @@ $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $fileLocation = Join-Path $toolsDir 'MobSwitcher-Installer.msi'
 
 function Show-InstalledToast {
-  $ErrorActionPreference = "Stop"
+  $ErrorActionPreference = "SilentlyContinue"
 
   $notificationTitle = "MobSwitcher installed!"
 
