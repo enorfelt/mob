@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
+using MobSwitcher.Core.Services;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -11,13 +12,14 @@ namespace MobSwitcher.Windows
 {
   public class ToastProgressBar
   {
-    //private readonly ISayService sayService;
+    private readonly ISayService sayService;
     private static ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
     private bool isStopped = false;
-    public ToastProgressBar(int durationInSeconds)
+    public ToastProgressBar(ISayService sayService, int durationInSeconds)
     {
+      this.sayService = sayService;
       DurationInSeconds = durationInSeconds;
-      TaskbarProgress.SetState(TaskbarStates.Normal);
+      TaskbarProgress.SetState(TaskbarState.Normal);
     }
 
     public int DurationInSeconds { get; set; }
@@ -42,7 +44,7 @@ namespace MobSwitcher.Windows
       }
 
       ShowCompleted();
-      TaskbarProgress.SetState(TaskbarProgress.TaskbarStates.NoProgress);
+      TaskbarProgress.SetState(TaskbarProgress.TaskbarState.NoProgress);
     }
 
     public void Stop()
@@ -119,6 +121,22 @@ namespace MobSwitcher.Windows
       notification.Tag = ToastProperties.Tag;
       notification.Group = ToastProperties.Group;
       toastNotifier.Show(notification);
+    }
+
+    private bool IsToastEnabled()
+    {
+      bool isEnabled;
+      try
+      {
+        isEnabled = toastNotifier.Setting == NotificationSetting.Enabled;
+      }
+      catch(Exception ex)
+      {
+        isEnabled = true;
+        this.sayService.SayError($"Problem to get toast settings. Probably for the first time. Try showing anyway. Reason: {ex.Message}");
+      }
+
+      return isEnabled;
     }
 
     private void UpdateProgressBar(int secondsRemaining)

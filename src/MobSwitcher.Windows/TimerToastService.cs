@@ -25,7 +25,7 @@ namespace MobSwitcher.Windows
       console.CancelKeyPress += Console_CancelKeyPress;
 
       var durationInSeconds = Convert.ToInt32(minutes * 60);
-      toastProgressBar = new ToastProgressBar(durationInSeconds);
+      toastProgressBar = new ToastProgressBar(sayService, durationInSeconds);
       sayService.Say("Mobing in progress... (Ctrl+C exits timer)");
       toastProgressBar.Start();
       
