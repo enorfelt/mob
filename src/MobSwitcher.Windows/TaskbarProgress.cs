@@ -3,8 +3,17 @@ using System.Runtime.InteropServices;
 
 namespace MobSwitcher.Windows
 {
-	public static partial class TaskbarProgress
+	public static class TaskbarProgress
 	{
+		public enum TaskbarState
+		{
+			NoProgress = 0,
+			Indeterminate = 0x1,
+			Normal = 0x2,
+			Error = 0x4,
+			Paused = 0x8
+		}
+
 		[ComImport()]
 		[Guid("ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf")]
 		[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]

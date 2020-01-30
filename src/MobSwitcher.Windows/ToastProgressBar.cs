@@ -123,6 +123,7 @@ namespace MobSwitcher.Windows
       toastNotifier.Show(notification);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
     private bool IsToastEnabled()
     {
       bool isEnabled;
@@ -130,7 +131,7 @@ namespace MobSwitcher.Windows
       {
         isEnabled = toastNotifier.Setting == NotificationSetting.Enabled;
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         isEnabled = true;
         this.sayService.SayError($"Problem to get toast settings. Probably for the first time. Try showing anyway. Reason: {ex.Message}");
