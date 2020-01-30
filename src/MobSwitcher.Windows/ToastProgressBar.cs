@@ -110,10 +110,9 @@ namespace MobSwitcher.Windows
       Show(new ToastNotification(doc));
     }
 
-    private static void Show(ToastNotification notification)
+    private void Show(ToastNotification notification)
     {
-      var settings = toastNotifier.Setting;
-      if (settings != NotificationSetting.Enabled)
+      if (!IsToastEnabled())
       {
         return;
       }
