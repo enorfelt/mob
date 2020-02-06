@@ -107,5 +107,13 @@ namespace MobSwticher.Cli.Tests {
       fakeCmdService.Commands.Should().NotContain("git stash");
       fakeCmdService.Commands.Should().NotContain("git stash pop");
     }
+
+    [Fact]
+    public async Task ShouldNotResetWhenNotingToCommit()
+    {
+      var result = await fixture.Run("start");
+
+      fakeCmdService.Commands.Should().NotContain("git reset --hard");
+    }
   }
 }

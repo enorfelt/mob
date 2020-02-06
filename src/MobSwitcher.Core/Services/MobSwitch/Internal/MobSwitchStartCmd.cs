@@ -9,18 +9,12 @@
     internal override void Run()
     {
       var keepUncommitedChanges = false;
-      if (!IsNothingToCommit())
+      var nothingToCommit = IsNothingToCommit();
+      if (!nothingToCommit)
       {
         keepUncommitedChanges = service.Say.GetYesNo("Keep uncommited changes?", true);
-      }
-
-      if (keepUncommitedChanges)
-      {
-        Git("stash");
-      }
-      else
-      {
-        Git("reset --hard");
+        var stashOrResetCmd = keepUncommitedChanges ? "stash" : "reset --hard";
+        Git(stashOrResetCmd);
       }
 
       Git("fetch --prune");
