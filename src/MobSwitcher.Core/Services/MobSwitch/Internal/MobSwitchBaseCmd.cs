@@ -64,7 +64,7 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal {
     }
 
     internal string Git (string args, bool silent = false) {
-      return this.service.GitService.Git (args, silent);
+      return this.service.GitService.Git(args, silent);
     }
   }
 }

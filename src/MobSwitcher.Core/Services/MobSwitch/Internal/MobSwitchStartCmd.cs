@@ -51,8 +51,8 @@
       else
       {
         service.Say.SayInfo($"purging local branch and start new {WIP_BRANCH} branch from {BASE_BRANCH}");
-        Git($"branch -D {WIP_BRANCH}");
         Git($"checkout {BASE_BRANCH}");
+        Git($"branch -D {WIP_BRANCH}");
         Git($"merge {REMOTE_NAME}/{BASE_BRANCH} --ff-only");
         Git($"branch {WIP_BRANCH}");
         Git($"checkout {WIP_BRANCH}");
