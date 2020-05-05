@@ -36,7 +36,7 @@ simon> git commit --message "describe what the mob session was all about"
 - `mob reset` deletes `mob-session` and `origin/mob-session`
 
 ## How can one customize it?
-You can set several environment variables, such as `MOBSWTICHER_WipBranch` and `MOBSWTICHER_RemoteName`, that will be picked up by `mob`. See [the appsettings.json for an extensive list](https://github.com/enorfelt/MobSwitcher/blob/master/src/MobSwitcher.Cli/appsettings.json). Use `MOBSWTICHER_`as prefix.
+You can set several environment variables, such as `MOBSWITCHER_WipBranch` and `MOBSWITCHER_RemoteName`, that will be picked up by `mob`. See [the appsettings.json for an extensive list](https://github.com/enorfelt/MobSwitcher/blob/master/src/MobSwitcher.Cli/appsettings.json). Use `MOBSWITCHER_`as prefix.
 You can also set config per repository by `mob config set UsePrettyPrint true`. That will create a `.mob` folder at the root of your repository. The folder will contain the settings file.
 
 Pretty print is enabled by default. It uses the [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) Hack font face. You need to install it and enable it in your terminal.
