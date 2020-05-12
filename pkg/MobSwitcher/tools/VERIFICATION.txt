@@ -9,12 +9,12 @@ the mob.exe and MobSwitcher NuGet packages.
 The executable have been downloaded from their official download link listed on <https://github.com/enorfelt/MobSwitcher/releases>
 and can be verified like this:
 
-1. Download the executable: <https://github.com/enorfelt/MobSwitcher/releases/download/1.3.2/MobSwitcher-Installer.msi>
+1. Download the executable: <https://github.com/enorfelt/MobSwitcher/releases/download/1.3.3/MobSwitcher-Installer.msi>
 2. You can use one of the following methods to obtain the checksum
   - Use powershell function 'Get-Filehash MobSwitcher-Installer.msi'
   - Use chocolatey utility 'checksum.exe MobSwitcher-Installer.msi -t=sha256'
 
   checksum type: sha256
-  checksum: 21F7ECDC814430DE7F1B633F1DB09DEB7B17DCFE493DE88DCFDCA0246644B34A
+  checksum: C33C3C80EF9AFEA9A8C49A0F7F34CEDF265F965BDE801099233B35C7DF768C4B
 
 File 'LICENSE.txt' is obtained from <https://github.com/enorfelt/MobSwitcher/blob/master/pkg/MobSwitcher/tools/LICENSE.txt>
