@@ -1,9 +1,7 @@
-﻿using MobSwitcher.Core.Services.Shell;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using MobSwitcher.Core.Services.Shell;
 
-namespace MobSwticher.Cli.Tests.Fakes
+namespace MobSwitcher.Cli.Tests.Fakes
 {
   public class FakeShellCmdService : IShellCmdService
   {

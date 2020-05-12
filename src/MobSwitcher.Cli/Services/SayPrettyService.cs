@@ -1,7 +1,6 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using MobSwitcher.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace MobSwitcher.Cli.Services

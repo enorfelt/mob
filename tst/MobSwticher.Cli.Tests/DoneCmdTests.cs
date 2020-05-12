@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using MobSwticher.Cli.Tests.Fakes;
+using MobSwitcher.Cli.Tests.Fakes;
 using Xunit;
 
-namespace MobSwticher.Cli.Tests
+namespace MobSwitcher.Cli.Tests
 {
   public class DoneCmdTests
   {

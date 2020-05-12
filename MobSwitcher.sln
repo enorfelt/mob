@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobSwitcher.Windows", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tst", "Tst", "{ABF49702-0384-4FE0-A37D-A0853B929013}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobSwticher.Cli.Tests", "tst\MobSwticher.Cli.Tests\MobSwticher.Cli.Tests.csproj", "{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobSwitcher.Cli.Tests", "tst\MobSwticher.Cli.Tests\MobSwitcher.Cli.Tests.csproj", "{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
