@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using MobSwitcher.Cli.Tests.Fakes;
 using MobSwitcher.Core.Services;
 using MobSwitcher.Core.Services.Shell;
+using Xunit.Sdk;
 
 namespace MobSwitcher.Cli.Tests
 {

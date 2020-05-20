@@ -13,7 +13,7 @@ namespace MobSwitcher.Windows
   public class ToastProgressBar
   {
     private readonly ISayService sayService;
-    private static ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
+    private static readonly ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
     private bool isStopped = false;
     public ToastProgressBar(ISayService sayService, int durationInSeconds)
     {
@@ -188,8 +188,10 @@ namespace MobSwitcher.Windows
       var content = toastContent.GetContent();
       doc.LoadXml(content);
 
-      var toastNotif = new ToastNotification(doc);
-      toastNotif.Data = new NotificationData();
+      var toastNotif = new ToastNotification(doc)
+      {
+        Data = new NotificationData()
+      };
       toastNotif.Data.Values["progressValue"] = "0";
       var durationInMinutes = DurationInSeconds / 60;
       toastNotif.Data.Values["progressValueString"] = $"{durationInMinutes}/{durationInMinutes} minutes";

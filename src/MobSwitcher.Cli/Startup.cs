@@ -55,8 +55,8 @@ namespace MobSwitcher.Cli
       });
 
       var configuration = new ConfigurationBuilder()
-          .SetBasePath(Directory.GetCurrentDirectory())
-          .AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json", optional: true, reloadOnChange: true)
+          .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+          .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
           .AddEnvironmentVariables("MOBSWTICHER_")
           .AddEnvironmentVariables("MOBSWITCHER_")
           .AddGitPath(services)

@@ -1,14 +1,16 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using MobSwitcher.Cli.Tests.Fakes;
 using Xunit;
 
-namespace MobSwitcher.Cli.Tests {
-  public class StartCmdTests {
-    private StartupFixture fixture;
+namespace MobSwitcher.Cli.Tests
+{
+  public class StartCmdTests
+  {
+    private readonly StartupFixture fixture;
 
-    public StartCmdTests() {
+    public StartCmdTests()
+    {
       fixture = new StartupFixture();
     }
 
@@ -17,14 +19,16 @@ namespace MobSwitcher.Cli.Tests {
     [InlineData("START")]
     [InlineData("s")]
     [InlineData("S")]
-    public async Task ShouldStartOnArgument(string cmd) {
+    public async Task ShouldStartOnArgument(string cmd)
+    {
       var result = await fixture.Run(cmd);
 
       fixture.FakeShellCmdService.Called.Should().BeGreaterOrEqualTo(1);
     }
 
     [Fact]
-    public async Task ShouldRejoinWhenHasSessionBranchLocalAndRemote() {
+    public async Task ShouldRejoinWhenHasSessionBranchLocalAndRemote()
+    {
       fixture.FakeShellCmdService.Add("git status --short", string.Empty);
       fixture.FakeShellCmdService.Add("git branch", "  mob-session");
       fixture.FakeShellCmdService.Add("git branch --remotes", "  origin/mob-session");
@@ -35,7 +39,8 @@ namespace MobSwitcher.Cli.Tests {
     }
 
     [Fact]
-    public async Task ShouldCreateWhenSessionBranchDontExists() {
+    public async Task ShouldCreateWhenSessionBranchDontExists()
+    {
       fixture.FakeShellCmdService.Add("git status --short", string.Empty);
       fixture.FakeShellCmdService.Add("git branch", string.Empty);
       fixture.FakeShellCmdService.Add("git branch --remotes", string.Empty);
@@ -46,7 +51,8 @@ namespace MobSwitcher.Cli.Tests {
     }
 
     [Fact]
-    public async Task ShouldJoinWhenLocalSessionBranchDontExists() {
+    public async Task ShouldJoinWhenLocalSessionBranchDontExists()
+    {
       fixture.FakeShellCmdService.Add("git status --short", string.Empty);
       fixture.FakeShellCmdService.Add("git branch", string.Empty);
       fixture.FakeShellCmdService.Add("git branch --remotes", "  origin/mob-session");
@@ -57,7 +63,8 @@ namespace MobSwitcher.Cli.Tests {
     }
 
     [Fact]
-    public async Task ShouldStartNewWhenLocalSessionBranchExistsAndRemoteDont() {
+    public async Task ShouldStartNewWhenLocalSessionBranchExistsAndRemoteDont()
+    {
       fixture.FakeShellCmdService.Add("git status --short", string.Empty);
       fixture.FakeShellCmdService.Add("git branch", "  mob-session");
       fixture.FakeShellCmdService.Add("git branch --remotes", string.Empty);
