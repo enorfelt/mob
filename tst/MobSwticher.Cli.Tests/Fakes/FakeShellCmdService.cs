@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MobSwitcher.Core.Services.Shell;
 
 namespace MobSwitcher.Cli.Tests.Fakes
@@ -18,7 +19,14 @@ namespace MobSwitcher.Cli.Tests.Fakes
       Responses = new List<string>();
     }
 
-    public Dictionary<string, string> ShellCmdResponses { get; private set; }
+    private Dictionary<string, string> ShellCmdResponses { get; set; }
+
+    public void Add(string key, string value)
+    {
+      value = value.Replace("\r\n", Environment.NewLine);
+
+      ShellCmdResponses.Add(key, value);
+    }
 
     public string Run(string shellCmd)
     {

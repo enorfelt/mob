@@ -29,9 +29,9 @@ namespace MobSwitcher.Cli.Tests {
 
     [Fact]
     public async Task ShouldRejoinWhenHasSessionBranchLocalAndRemote() {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch", "  mob-session");
-      fakeCmdService.ShellCmdResponses.Add("git branch --remotes", "  origin/mob-session");
+      fakeCmdService.Add("git status --short", string.Empty);
+      fakeCmdService.Add("git branch", "  mob-session");
+      fakeCmdService.Add("git branch --remotes", "  origin/mob-session");
 
       var result = await fixture.Run("start");
 
@@ -40,9 +40,9 @@ namespace MobSwitcher.Cli.Tests {
 
     [Fact]
     public async Task ShouldCreateWhenSessionBranchDontExists() {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch --remotes", string.Empty);
+      fakeCmdService.Add("git status --short", string.Empty);
+      fakeCmdService.Add("git branch", string.Empty);
+      fakeCmdService.Add("git branch --remotes", string.Empty);
 
       var result = await fixture.Run("start");
 
@@ -51,9 +51,9 @@ namespace MobSwitcher.Cli.Tests {
 
     [Fact]
     public async Task ShouldJoinWhenLocalSessionBranchDontExists() {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch --remotes", "  origin/mob-session");
+      fakeCmdService.Add("git status --short", string.Empty);
+      fakeCmdService.Add("git branch", string.Empty);
+      fakeCmdService.Add("git branch --remotes", "  origin/mob-session");
 
       var result = await fixture.Run("start");
 
@@ -62,9 +62,9 @@ namespace MobSwitcher.Cli.Tests {
 
     [Fact]
     public async Task ShouldStartNewWhenLocalSessionBranchExistsAndRemoteDont() {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch", "  mob-session");
-      fakeCmdService.ShellCmdResponses.Add("git branch --remotes", string.Empty);
+      fakeCmdService.Add("git status --short", string.Empty);
+      fakeCmdService.Add("git branch", "  mob-session");
+      fakeCmdService.Add("git branch --remotes", string.Empty);
 
       var result = await fixture.Run("start");
 
@@ -74,9 +74,9 @@ namespace MobSwitcher.Cli.Tests {
     [Fact]
     public async Task ShouldNotDeleteMobBranchWhenOnMobBranchAndMobbing()
     {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
-      fakeCmdService.ShellCmdResponses.Add("git branch", "* mob-session");
-      fakeCmdService.ShellCmdResponses.Add("git branch --remotes", "  origin/mob-session");
+      fakeCmdService.Add("git status --short", string.Empty);
+      fakeCmdService.Add("git branch", "* mob-session");
+      fakeCmdService.Add("git branch --remotes", "  origin/mob-session");
 
       var result = await fixture.Run("start");
 
@@ -86,7 +86,7 @@ namespace MobSwitcher.Cli.Tests {
     [Fact]
     public async Task ShouldKeepUncommitedChangesWhenPrompted()
     {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", "work in progress");
+      fakeCmdService.Add("git status --short", "work in progress");
       fakeSayService.GetYesNoAnswer = true;
 
       var result = await fixture.Run("start");
@@ -98,7 +98,7 @@ namespace MobSwitcher.Cli.Tests {
     [Fact]
     public async Task ShouldDiscardUncommitedChangesBeforeStart()
     {
-      fakeCmdService.ShellCmdResponses.Add("git status --short", "work in progress");
+      fakeCmdService.Add("git status --short", "work in progress");
       fakeSayService.GetYesNoAnswer = false;
 
       var result = await fixture.Run("start");

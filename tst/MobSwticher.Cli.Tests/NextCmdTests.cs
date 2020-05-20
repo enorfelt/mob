@@ -34,7 +34,7 @@ namespace MobSwitcher.Cli.Tests
     [Fact]
     public async Task ShouldNotNextWhenNotMobbing()
     {
-      fakeShellCmd.ShellCmdResponses.Add("git branch", string.Empty);
+      fakeShellCmd.Add("git branch", string.Empty);
 
       await fixture.Run("next");
 
@@ -51,13 +51,13 @@ namespace MobSwitcher.Cli.Tests
     {
 
       fixture.FakeShellCmdService = new FakeShellCmdService();
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git rev-parse --is-inside-work-tree", "true");
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git rev-parse --show-toplevel", "true");
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git branch", "  master\n* mob-session\n");
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git status --short", string.Empty);
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git --no-pager log master..mob-session --pretty=\"format:%an\" --abbrev-commit", commiters);
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git config --get user.name", currentUsers);
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git checkout master", string.Empty);
+      fixture.FakeShellCmdService.Add("git rev-parse --is-inside-work-tree", "true");
+      fixture.FakeShellCmdService.Add("git rev-parse --show-toplevel", "true");
+      fixture.FakeShellCmdService.Add("git branch", "  master\n* mob-session\n");
+      fixture.FakeShellCmdService.Add("git status --short", string.Empty);
+      fixture.FakeShellCmdService.Add("git --no-pager log master..mob-session --pretty=\"format:%an\" --abbrev-commit", commiters);
+      fixture.FakeShellCmdService.Add("git config --get user.name", currentUsers);
+      fixture.FakeShellCmdService.Add("git checkout master", string.Empty);
 
       var result = await fixture.Run(new[] { "next" });
 
@@ -68,7 +68,7 @@ namespace MobSwitcher.Cli.Tests
     [Fact]
     public async Task NextShouldCheckoutMasterBranch()
     {
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git branch", "  master\n* mob-session\n");
+      fixture.FakeShellCmdService.Add("git branch", "  master\n* mob-session\n");
 
       var result = await fixture.Run(new[] { "next" });
 
@@ -80,7 +80,7 @@ namespace MobSwitcher.Cli.Tests
     [InlineData("--Stay")]
     public async Task NextStayArgumentShouldStayOnMobSessionBranch(string arg)
     {
-      fixture.FakeShellCmdService.ShellCmdResponses.Add("git branch", "  master\n* mob-session\n");
+      fixture.FakeShellCmdService.Add("git branch", "  master\n* mob-session\n");
 
       var result = await fixture.Run(new[] { "next", arg });
 

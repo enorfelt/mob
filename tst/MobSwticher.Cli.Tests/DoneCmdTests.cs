@@ -34,7 +34,7 @@ namespace MobSwitcher.Cli.Tests
     [Fact]
     public async Task ShouldNotDoneWhenNotMobbing()
     {
-      fakeShellCmd.ShellCmdResponses.Add("git branch", string.Empty);
+      fakeShellCmd.Add("git branch", string.Empty);
 
       await fixture.Run("done");
 
@@ -44,8 +44,8 @@ namespace MobSwitcher.Cli.Tests
     [Fact]
     public async Task ShouldDeleteSessionBranchWhenAlreadyDone()
     {
-      fakeShellCmd.ShellCmdResponses.Add("git branch", "* mob-session");
-      fakeShellCmd.ShellCmdResponses.Add("git branch --remotes", string.Empty);
+      fakeShellCmd.Add("git branch", "* mob-session");
+      fakeShellCmd.Add("git branch --remotes", string.Empty);
 
       await fixture.Run("done");
 
@@ -55,8 +55,8 @@ namespace MobSwitcher.Cli.Tests
     [Fact]
     public async Task ShouldAddAll()
     {
-      fakeShellCmd.ShellCmdResponses.Add("git branch", "* mob-session");
-      fakeShellCmd.ShellCmdResponses.Add("git branch --remotes", "  origin/mob-session");
+      fakeShellCmd.Add("git branch", "* mob-session");
+      fakeShellCmd.Add("git branch --remotes", "  origin/mob-session");
 
       await fixture.Run("done");
 
