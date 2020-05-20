@@ -41,8 +41,8 @@ namespace MobSwitcher.Cli
         config.ClearProviders();
         config.AddProvider(new SerilogLoggerProvider(Log.Logger));
       });
-      services.AddSingleton<IShellCmdService, CmdShellCmdService>();
-      services.AddSingletonIfNotExists<IGitService, GitService>();
+      services.AddSingletonIfNotExists<IShellCmdService, CmdShellCmdService>();
+      services.AddSingleton<IGitService, GitService>();
       services.AddSingleton<IMobSwitchService, MobSwitchService>();
       services.AddSingleton<ITimerService, TimerToastService>();
       services.AddSingleton<IToastService, ToastService>();

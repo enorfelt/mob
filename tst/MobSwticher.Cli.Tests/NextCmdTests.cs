@@ -9,14 +9,10 @@ namespace MobSwitcher.Cli.Tests
   public class NextCmdTests
   {
     protected readonly StartupFixture fixture;
-    private readonly FakeShellCmdService fakeShellCmd;
-    private readonly FakeSayService fakeSay;
 
     public NextCmdTests()
     {
       this.fixture = new StartupFixture();
-      fakeShellCmd = this.fixture.FakeShellCmdService;
-      fakeSay = this.fixture.FakeSayService;
     }
 
     [Theory]
@@ -28,17 +24,17 @@ namespace MobSwitcher.Cli.Tests
     {
       var result = await fixture.Run(cmd);
 
-      fakeShellCmd.Called.Should().BeGreaterOrEqualTo(1);
+      fixture.FakeShellCmdService.Called.Should().BeGreaterOrEqualTo(1);
     }
 
     [Fact]
     public async Task ShouldNotNextWhenNotMobbing()
     {
-      fakeShellCmd.Add("git branch", string.Empty);
+      fixture.FakeShellCmdService.Add("git branch", string.Empty);
 
       await fixture.Run("next");
 
-      fakeSay.Says.Last().Should().Contain("you aren't mobbing");
+      fixture.FakeSayService.Says.Last().Should().Contain("you aren't mobbing");
     }
 
     [Theory]
@@ -50,7 +46,6 @@ namespace MobSwitcher.Cli.Tests
     public async Task NextShouldShowNameOfNextTypist(string commiters, string currentUsers, string expectedNext)
     {
 
-      fixture.FakeShellCmdService = new FakeShellCmdService();
       fixture.FakeShellCmdService.Add("git rev-parse --is-inside-work-tree", "true");
       fixture.FakeShellCmdService.Add("git rev-parse --show-toplevel", "true");
       fixture.FakeShellCmdService.Add("git branch", "  master\n* mob-session\n");
