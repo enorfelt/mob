@@ -1,4 +1,4 @@
-![.NET Core](https://github.com/enorfelt/MobSwitcher/workflows/.NET%20Core/badge.svg?branch=master)
+![Master](https://github.com/enorfelt/MobSwitcher/workflows/Master/badge.svg?branch=master)
 # Tool for Remote Mob Programming
 
 ![mob Logo](logo.svg)
