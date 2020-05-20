@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MobSwitcher.Cli.Tests.Fakes;
@@ -12,9 +13,12 @@ namespace MobSwitcher.Cli.Tests {
     public StartupFixture () : base () {
       FakeShellCmdService = new FakeShellCmdService();
       FakeSayService = new FakeSayService();
+      Environment.SetEnvironmentVariable("MOBSWITCHER_WipBranch", "mob-session");
     }
 
     public override void ConfigureServices (HostBuilderContext hostContext, IServiceCollection services) {
+      
+
       services.AddSingleton<ISayService> (services => {
         return FakeSayService;
       });
