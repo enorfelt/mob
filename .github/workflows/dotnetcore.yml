@@ -1,4 +1,4 @@
-name: .NET Core
+name: Master
 
 on:
   push:
