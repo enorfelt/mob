@@ -6,7 +6,7 @@ using MobSwitcher.Cli.Commands.Config;
 
 namespace MobSwitcher.Cli.Commands
 {
-    [Command(Name = "mob", ThrowOnUnexpectedArgument = false, OptionsComparison = System.StringComparison.InvariantCultureIgnoreCase )]
+    [Command(Name = "mob", UnrecognizedArgumentHandling = UnrecognizedArgumentHandling.CollectAndContinue, OptionsComparison = System.StringComparison.InvariantCultureIgnoreCase )]
     [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
     [Subcommand(
         typeof(StartCmd),
