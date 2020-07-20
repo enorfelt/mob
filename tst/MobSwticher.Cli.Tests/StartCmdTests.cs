@@ -21,7 +21,7 @@ namespace MobSwitcher.Cli.Tests
     [InlineData("S")]
     public async Task ShouldStartOnArgument(string cmd)
     {
-      var result = await fixture.Run(cmd);
+      _ = await fixture.Run(cmd);
 
       fixture.FakeShellCmdService.Called.Should().BeGreaterOrEqualTo(1);
     }
@@ -32,8 +32,7 @@ namespace MobSwitcher.Cli.Tests
       fixture.FakeShellCmdService.Add("git status --short", string.Empty);
       fixture.FakeShellCmdService.Add("git branch", "  mob-session");
       fixture.FakeShellCmdService.Add("git branch --remotes", "  origin/mob-session");
-
-      var result = await fixture.Run("start");
+      _ = await fixture.Run("start");
 
       fixture.FakeSayService.Says.Should().Contain("rejoining mob session");
     }
@@ -80,8 +79,7 @@ namespace MobSwitcher.Cli.Tests
       fixture.FakeShellCmdService.Add("git status --short", string.Empty);
       fixture.FakeShellCmdService.Add("git branch", "* mob-session");
       fixture.FakeShellCmdService.Add("git branch --remotes", "  origin/mob-session");
-
-      var result = await fixture.Run("start");
+      _ = await fixture.Run("start");
 
       fixture.FakeShellCmdService.Commands.Should().NotContain("git branch -D mob-session");
     }
@@ -91,8 +89,7 @@ namespace MobSwitcher.Cli.Tests
     {
       fixture.FakeShellCmdService.Add("git status --short", "work in progress");
       fixture.FakeSayService.GetYesNoAnswer = true;
-
-      var result = await fixture.Run("start");
+      _ = await fixture.Run("start");
 
       fixture.FakeShellCmdService.Commands.Should().Contain("git stash");
       fixture.FakeShellCmdService.Commands.Should().Contain("git stash pop");
@@ -103,8 +100,7 @@ namespace MobSwitcher.Cli.Tests
     {
       fixture.FakeShellCmdService.Add("git status --short", "work in progress");
       fixture.FakeSayService.GetYesNoAnswer = false;
-
-      var result = await fixture.Run("start");
+      _ = await fixture.Run("start");
 
       fixture.FakeShellCmdService.Commands.Should().Contain("git reset --hard");
       fixture.FakeShellCmdService.Commands.Should().NotContain("git stash");
@@ -114,7 +110,7 @@ namespace MobSwitcher.Cli.Tests
     [Fact]
     public async Task ShouldNotResetWhenNotingToCommit()
     {
-      var result = await fixture.Run("start");
+      _ = await fixture.Run("start");
 
       fixture.FakeShellCmdService.Commands.Should().NotContain("git reset --hard");
     }

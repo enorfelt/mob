@@ -22,7 +22,7 @@ namespace MobSwitcher.Cli.Tests
     [InlineData("N")]
     public async Task ShouldNextOnArgument(string cmd)
     {
-      var result = await fixture.Run(cmd);
+      _ = await fixture.Run(cmd);
 
       fixture.FakeShellCmdService.Called.Should().BeGreaterOrEqualTo(1);
     }
@@ -64,8 +64,7 @@ namespace MobSwitcher.Cli.Tests
     public async Task NextShouldCheckoutMasterBranch()
     {
       fixture.FakeShellCmdService.Add("git branch", "  master\n* mob-session\n");
-
-      var result = await fixture.Run(new[] { "next" });
+      _ = await fixture.Run(new[] { "next" });
 
       fixture.FakeShellCmdService.Commands.Last().Should().Contain("git checkout master");
     }
@@ -76,8 +75,7 @@ namespace MobSwitcher.Cli.Tests
     public async Task NextStayArgumentShouldStayOnMobSessionBranch(string arg)
     {
       fixture.FakeShellCmdService.Add("git branch", "  master\n* mob-session\n");
-
-      var result = await fixture.Run(new[] { "next", arg });
+      _ = await fixture.Run(new[] { "next", arg });
 
       fixture.FakeShellCmdService.Commands.Last().Should().NotContain("git checkout master");
     }

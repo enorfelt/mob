@@ -99,12 +99,14 @@ namespace MobSwitcher.Windows
       Show(doc);
     }
 
-    private void Show(XmlDocument template)
+    private static void Show(XmlDocument template)
     {
       var notifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
-      var notification = new ToastNotification(template);
-      notification.Tag = ToastProperties.Tag;
-      notification.Group = ToastProperties.Group;
+      var notification = new ToastNotification(template)
+      {
+        Tag = ToastProperties.Tag,
+        Group = ToastProperties.Group
+      };
       notifier.Show(notification);
     }
   }
