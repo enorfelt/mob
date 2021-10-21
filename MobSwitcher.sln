@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29418.71
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{F250E4F2-3AEF-433E-8A70-29DD651F7511}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tst", "Tst", "{ABF49702-0384-4FE0-A37D-A0853B929013}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobSwitcher.Cli.Tests", "tst\MobSwticher.Cli.Tests\MobSwitcher.Cli.Tests.csproj", "{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobSwitcher.CommandLine", "src\MobSwitcher.CommandLine\MobSwitcher.CommandLine.csproj", "{19B65F79-1329-4763-9C67-07ABF9112730}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,18 @@ Global
 		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x64.Build.0 = Release|Any CPU
 		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x86.ActiveCfg = Release|Any CPU
 		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7}.Release|x86.Build.0 = Release|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Debug|x64.Build.0 = Debug|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Debug|x86.Build.0 = Debug|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Release|x64.ActiveCfg = Release|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Release|x64.Build.0 = Release|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Release|x86.ActiveCfg = Release|Any CPU
+		{19B65F79-1329-4763-9C67-07ABF9112730}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +96,7 @@ Global
 		{0879996A-B764-4B1A-A416-0CC95FA25E2A} = {F250E4F2-3AEF-433E-8A70-29DD651F7511}
 		{131BE029-AD31-474B-B818-62AEF3AD08BD} = {F250E4F2-3AEF-433E-8A70-29DD651F7511}
 		{65A3EFCD-5F83-4802-A3CA-0C7424EBDDC7} = {ABF49702-0384-4FE0-A37D-A0853B929013}
+		{19B65F79-1329-4763-9C67-07ABF9112730} = {F250E4F2-3AEF-433E-8A70-29DD651F7511}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7921BA2C-7F64-40CB-A826-8B1338861250}
