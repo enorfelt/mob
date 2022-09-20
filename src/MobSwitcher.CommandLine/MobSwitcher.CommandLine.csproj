@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-	<TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
-	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>True</ImplicitUsings>
+	<!--RuntimeIdentifier>win-x64</RuntimeIdentifier-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1-dev-00876" />
-    <PackageReference Include="System.CommandLine.Hosting" Version="0.3.0-alpha.21216.1" />
+    <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.22272.1" />
   </ItemGroup>
 
   <ItemGroup>
