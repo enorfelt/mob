@@ -7,6 +7,8 @@ internal class Program
         .Enrich.FromLogContext()
         .CreateLogger();
 
+    Console.WriteLine($"Current dir {Directory.GetCurrentDirectory()}");
+
     var runner = BuildCommandLine()
         .UseHost(_ => CreateHostBuilder(args), (hostBuilder) => hostBuilder
             .ConfigureServices((hostContext, services) =>
@@ -14,6 +16,8 @@ internal class Program
               services.AddSingleton<IShellCmdService, CmdShellCmdService>();
               services.AddSingleton<IGitService, GitService>();
               services.AddSingleton<IMobSwitchService, MobSwitchService>();
+              services.AddSingleton<ITimerService, TimerToastService>();
+              services.AddSingleton<IToastService, ToastService>();
               services.AddSingleton<ISayService, SayPrettyService>();
 
               var configuration = new ConfigurationBuilder()
@@ -28,6 +32,7 @@ internal class Program
             })
             .UseSerilog()
             .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
+            .UseCommandHandler<StartCommand, StartCommand.Handler>()
             )
             .UseDefaults()
             .Build();
@@ -43,6 +48,7 @@ internal class Program
     root.Name = "mob";
 
     root.AddCommand(new StatusCommand());
+    root.AddCommand(new StartCommand());
 
     root.Handler = CommandHandler.Create(() => root.Invoke("-h"));
 

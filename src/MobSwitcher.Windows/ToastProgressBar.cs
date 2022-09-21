@@ -13,7 +13,7 @@ namespace MobSwitcher.Windows
   public class ToastProgressBar
   {
     private readonly ISayService sayService;
-    private static readonly ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
+    // private static readonly ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
     private bool isStopped = false;
     public ToastProgressBar(ISayService sayService, int durationInSeconds)
     {
@@ -119,7 +119,7 @@ namespace MobSwitcher.Windows
 
       notification.Tag = ToastProperties.Tag;
       notification.Group = ToastProperties.Group;
-      toastNotifier.Show(notification);
+      ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId).Show(notification);
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
@@ -128,7 +128,7 @@ namespace MobSwitcher.Windows
       bool isEnabled;
       try
       {
-        isEnabled = toastNotifier.Setting == NotificationSetting.Enabled;
+        isEnabled = ToastNotificationManager.CreateToastNotifier().Setting == NotificationSetting.Enabled;
       }
       catch (Exception ex)
       {
@@ -153,51 +153,73 @@ namespace MobSwitcher.Windows
       var minutesLeft = Math.Round((secondsRemaining / 60.0), 1);
       data.Values["progressValueString"] = $"{minutesLeft}/{durationInMinutes} minutes";
 
-      toastNotifier.Update(data, ToastProperties.Tag, ToastProperties.Group);
+      ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId).Update(data, ToastProperties.Tag, ToastProperties.Group);
 
       TaskbarProgress.SetValue(percentageCompleted * 100, 100);
     }
 
     private void ShowProgressBar()
     {
-      var toastContent = new ToastContent()
-      {
-        Visual = new ToastVisual()
+
+      // var toastContent = new ToastContent()
+      // {
+      //   Visual = new ToastVisual()
+      //   {
+      //     BindingGeneric = new ToastBindingGeneric()
+      //     {
+      //       Children =
+      //       {
+      //           new AdaptiveText()
+      //           {
+      //               Text = "Mobing in progress..."
+      //           },
+      //           new AdaptiveProgressBar()
+      //           {
+      //               Value = new BindableProgressBarValue("progressValue"),
+      //               ValueStringOverride = new BindableString("progressValueString"),
+      //               Status = new BindableString("progressStatus")
+      //           }
+      //       }
+      //     }
+      //   },
+      //   Duration = ToastDuration.Short
+      // };
+
+      var toastContentBuilder = new ToastContentBuilder()
+        .AddText("Mobing in progress...")
+        .AddVisualChild(new AdaptiveProgressBar()
         {
-          BindingGeneric = new ToastBindingGeneric()
-          {
-            Children =
-            {
-                new AdaptiveText()
-                {
-                    Text = "Mobing in progress..."
-                },
-                new AdaptiveProgressBar()
-                {
-                    Value = new BindableProgressBarValue("progressValue"),
-                    ValueStringOverride = new BindableString("progressValueString"),
-                    Status = new BindableString("progressStatus")
-                }
-            }
-          }
-        },
-        Duration = ToastDuration.Short
-      };
+          Value = new BindableProgressBarValue("progressValue"),
+          ValueStringOverride = new BindableString("progressValueString"),
+          Status = new BindableString("progressStatus")
+        })
+        .SetToastDuration(ToastDuration.Short);
 
-      var doc = new XmlDocument();
-      var content = toastContent.GetContent();
-      doc.LoadXml(content);
+      // var toastNotif = new ToastNotification(toastContentBuilder.GetToastContent().GetXml())
+      // {
+      //   Data = new NotificationData()
+      // };
+      // toastNotif.Data.Values["progressValue"] = "0";
+      // var durationInMinutes = DurationInSeconds / 60;
+      // toastNotif.Data.Values["progressValueString"] = $"{durationInMinutes}/{durationInMinutes} minutes";
+      // toastNotif.Data.Values["progressStatus"] = "Time left...";
 
-      var toastNotif = new ToastNotification(doc)
-      {
-        Data = new NotificationData()
-      };
+      CustomizeToast del = new CustomizeToast(CustomizeToast);
+
+      toastContentBuilder.Show(del);
+
+      // Show(toastNotif);
+    }
+
+    private void CustomizeToast(ToastNotification toastNotif) 
+    {
+      toastNotif.Tag = ToastProperties.Tag;
+      toastNotif.Group = ToastProperties.Group;
+      toastNotif.Data = new NotificationData();
       toastNotif.Data.Values["progressValue"] = "0";
       var durationInMinutes = DurationInSeconds / 60;
       toastNotif.Data.Values["progressValueString"] = $"{durationInMinutes}/{durationInMinutes} minutes";
       toastNotif.Data.Values["progressStatus"] = "Time left...";
-
-      Show(toastNotif);
     }
 
     private class TimerState
