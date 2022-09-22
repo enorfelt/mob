@@ -33,6 +33,7 @@ internal class Program
             .UseSerilog()
             .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
             .UseCommandHandler<StartCommand, StartCommand.Handler>()
+            .UseCommandHandler<TimerCommand, TimerCommand.Handler>()
             )
             .UseDefaults()
             .Build();
@@ -49,6 +50,7 @@ internal class Program
 
     root.AddCommand(new StatusCommand());
     root.AddCommand(new StartCommand());
+    root.AddCommand(new TimerCommand());
 
     root.Handler = CommandHandler.Create(() => root.Invoke("-h"));
 

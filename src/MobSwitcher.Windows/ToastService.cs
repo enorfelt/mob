@@ -1,113 +1,65 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using MobSwitcher.Core.Services;
 using System;
-using System.IO;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace MobSwitcher.Windows
+namespace MobSwitcher.Windows;
+
+public class ToastService : IToastService
 {
-  public class ToastService : IToastService
+  public void Toast(string message)
   {
-    public void Toast(string message)
-    {
-      if (string.IsNullOrEmpty(message))
-        throw new ArgumentNullException(nameof(message));
+    if (string.IsNullOrEmpty(message))
+      throw new ArgumentNullException(nameof(message));
 
-      var toastContent = new ToastContent()
+    var toastContent = new ToastContentBuilder()
+      .AddText(message)
+      .AddButton(new ToastButtonDismiss())
+      .SetToastScenario(ToastScenario.Alarm)
+      .SetToastDuration(ToastDuration.Long)
+      .AddAudio(new ToastAudio 
       {
-        Visual = new ToastVisual()
-        {
-          BindingGeneric = new ToastBindingGeneric()
-          {
-            Children =
-            {
-                new AdaptiveText()
-                {
-                    Text = message
-                }
-            }
-          }
-        },
-        Actions = new ToastActionsCustom()
-        {
-          Buttons =
-          {
-            new ToastButtonDismiss()
-          }
-        },
-        Scenario = ToastScenario.Alarm,
-        Duration = ToastDuration.Long,
-        Audio = new ToastAudio
-        {
-          Loop = true,
-          Src = new Uri("ms-winsoundevent:Notification.Looping.Alarm4")
-        }
-      };
+        Loop = true,
+        Src = new Uri("ms-winsoundevent:Notification.Looping.Alarm4")
+      });
 
-      var doc = new XmlDocument();
-      doc.LoadXml(toastContent.GetContent());
-      Show(doc);
-    }
+    Show(toastContent.GetXml());
+  }
 
-    public void Toast(string message1, string message2)
-    {
-      if (string.IsNullOrEmpty(message1))
-        throw new ArgumentNullException(nameof(message1));
+  public void Toast(string message1, string message2)
+  {
+    if (string.IsNullOrEmpty(message1))
+      throw new ArgumentNullException(nameof(message1));
 
-      if (string.IsNullOrEmpty(message2))
-        throw new ArgumentNullException(nameof(message2));
+    if (string.IsNullOrEmpty(message2))
+      throw new ArgumentNullException(nameof(message2));
 
 
-      var toastContent = new ToastContent()
+    var toastContent = new ToastContentBuilder()
+      .AddText(message1)
+      .AddText(message2)
+      .AddButton(new ToastButtonDismiss())
+      .SetToastScenario(ToastScenario.Alarm)
+      .SetToastDuration(ToastDuration.Long)
+      .AddAudio(new ToastAudio 
       {
-        Visual = new ToastVisual()
-        {
-          BindingGeneric = new ToastBindingGeneric()
-          {
-            Children =
-            {
-                new AdaptiveText()
-                {
-                    Text = message1
-                },
-                new AdaptiveText()
-                {
-                    Text = message2
-                }
-            }
-          }
-        },
-        Actions = new ToastActionsCustom()
-        {
-          Buttons =
-          {
-            new ToastButtonDismiss()
-          }
-        },
-        Scenario = ToastScenario.Alarm,
-        Duration = ToastDuration.Long,
-        Audio = new ToastAudio
-        {
-          Loop = true,
-          Src = new Uri("ms-winsoundevent:Notification.Looping.Alarm4")
-        }
-      };
+        Loop = true,
+        Src = new Uri("ms-winsoundevent:Notification.Looping.Alarm4")
+      });
 
-      var doc = new XmlDocument();
-      doc.LoadXml(toastContent.GetContent());
-      Show(doc);
-    }
+    Show(toastContent.GetXml());
+  }
 
-    private static void Show(XmlDocument template)
+  private static void Show(XmlDocument template)
+  {
+    var notifier = ToastNotificationManagerCompat.CreateToastNotifier();
+    var notification = new ToastNotification(template)
     {
-      var notifier = ToastNotificationManager.CreateToastNotifier(ToastProperties.AppId);
-      var notification = new ToastNotification(template)
-      {
-        Tag = ToastProperties.Tag,
-        Group = ToastProperties.Group
-      };
-      notifier.Show(notification);
-    }
+      Tag = ToastProperties.Tag,
+      Group = ToastProperties.Group
+    };
+    notifier.Show(notification);
   }
 }
+
