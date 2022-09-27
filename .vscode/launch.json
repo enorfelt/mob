@@ -11,7 +11,7 @@
             // "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/src/MobSwitcher.CommandLine/bin/Debug/net6.0-windows10.0.17763.0/win-x64/mob.dll",
-            "args": ["t", "1"],
+            "args": ["status"],
             "cwd": "${workspaceFolder}/../mob-test",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "integratedTerminal",

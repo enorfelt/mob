@@ -8,7 +8,7 @@ namespace MobSwitcher.Core.Services.MobSwitch
     {
         void Reset();
         void Start();
-        void Next();
+        void Next(bool stay = false);
         void Done();
         void Status();
         void Join();

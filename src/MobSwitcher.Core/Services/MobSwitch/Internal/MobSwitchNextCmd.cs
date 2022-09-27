@@ -7,6 +7,16 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
     internal MobSwitchNextCmd(MobSwitchService service) : base(service)
     { }
 
+    internal void Run(bool stay = false) 
+    {
+      this.Run();
+      
+      if (!stay)
+      {
+        Git($"checkout {BASE_BRANCH}");
+      }
+    }
+
     internal override void Run()
     {
       if (!IsMobbing())
@@ -31,11 +41,6 @@ namespace MobSwitcher.Core.Services.MobSwitch.Internal
       }
 
       ShowNext();
-
-      if (!base.AppSettings.UseStayNext)
-      {
-        Git($"checkout {BASE_BRANCH}");
-      }
     }
 
     private void ShowNext()

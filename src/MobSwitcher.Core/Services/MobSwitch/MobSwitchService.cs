@@ -37,7 +37,7 @@ namespace MobSwitcher.Core.Services.MobSwitch
             new MobSwitchJoinCmd(this).Run();
         }
 
-        public void Next()
+        public void Next(bool stay = false)
         {
             new MobSwitchNextCmd(this).Run();
         }

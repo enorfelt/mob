@@ -18,3 +18,4 @@ global using System.CommandLine.Builder;
 global using System.CommandLine.Hosting;
 global using System.CommandLine.NamingConventionBinder;
 global using System.CommandLine.Parsing;
+global using Microsoft.Extensions.Options;

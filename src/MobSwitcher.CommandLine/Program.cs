@@ -9,7 +9,8 @@ internal class Program
 
     Console.WriteLine($"Current dir {Directory.GetCurrentDirectory()}");
 
-    var runner = BuildCommandLine()
+    var builder = BuildCommandLine();
+    var runner = builder
         .UseHost(_ => CreateHostBuilder(args), (hostBuilder) => hostBuilder
             .ConfigureServices((hostContext, services) =>
             {
@@ -19,6 +20,9 @@ internal class Program
               services.AddSingleton<ITimerService, TimerToastService>();
               services.AddSingleton<IToastService, ToastService>();
               services.AddSingleton<ISayService, SayPrettyService>();
+
+              services.AddCliCommands();
+              services.AddCommandsToRootCommand(builder.Command);
 
               var configuration = new ConfigurationBuilder()
                       .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -32,11 +36,11 @@ internal class Program
             })
             .UseSerilog()
             .UseCommandHandler<StatusCommand, StatusCommand.Handler>()
-            .UseCommandHandler<StartCommand, StartCommand.Handler>()
-            .UseCommandHandler<TimerCommand, TimerCommand.Handler>()
             )
             .UseDefaults()
             .Build();
+
+    
 
     return await runner.InvokeAsync(args);
   }
@@ -48,9 +52,7 @@ internal class Program
     var root = new RootCommand();
     root.Name = "mob";
 
-    root.AddCommand(new StatusCommand());
-    root.AddCommand(new StartCommand());
-    root.AddCommand(new TimerCommand());
+    // root.AddCommand(new StatusCommand());
 
     root.Handler = CommandHandler.Create(() => root.Invoke("-h"));
 

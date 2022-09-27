@@ -9,6 +9,8 @@ public class StartCommand : Command
       "Time",
       () => 15,
       "Time in minuts (default 15)"));
+
+    this.AddHandler<StartCommand.Handler>();
   }
 
   public new class Handler : ICommandHandler
