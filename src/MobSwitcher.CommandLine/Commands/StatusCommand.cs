@@ -4,7 +4,7 @@ public class StatusCommand : Command
 {
   public StatusCommand() : base("status", "Show status of mob session")
   {
-    // this.AddHandler<StatusCommand.Handler>();
+    this.AddHandler<StatusCommand.Handler>();
   }
 
   public new class Handler : ICommandHandler
